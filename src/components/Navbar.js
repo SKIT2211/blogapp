@@ -4,6 +4,7 @@ import Home from '../pages/Home'
 import Blogpart from './Blogpart';
 import Aboutus from '../pages/Aboutus';
 import Login from '../pages/Login';
+import Signup from '../pages/Signup';
 
 function Navbar() {
     return (
@@ -80,6 +81,8 @@ function Navbar() {
                 <Route path = '/blogpart' element={<Blogpart/>} />
                 <Route path = '/aboutus' element={<Aboutus/>} />
                 <Route path = '/login' element={<Login/>} />
+                <Route path = '/Signup' element={<Signup/>} />
+
 
             </Routes>
     </BrowserRouter>
