@@ -1,0 +1,109 @@
+{
+  "userDetails": [
+    {
+      "id": 1,
+      "name": "Shyam Kasundra",
+      "email": "shyam@test123.com",
+      "number": 8873450239,
+      "password": "Test@123"
+    },
+    {
+      "id": 2,
+      "name": "Chirag Vaghasiya",
+      "email": "chirag@123.com",
+      "number": 8349752965,
+      "password": "Chirag@123"
+    },
+    {
+      "id": 3,
+      "name": "Nilesh Bandhiya",
+      "email": "nilesh@123.com",
+      "number": 7584923845,
+      "password": "Nilesh@123"
+    },
+    {
+      "id": 4,
+      "name": "Kristin Esparza",
+      "email": "kristin@123.com",
+      "number": 9642536454,
+      "password": "Kristin@123"
+    },
+    {
+      "id": 5,
+      "name": "Keith King",
+      "email": "keith@123.com",
+      "number": 8345676237,
+      "password": "Keith@123"
+    },
+    {
+      "id": 6,
+      "name": "Robin Patterson",
+      "email": "robin@123.com",
+      "number": 9875457548,
+      "password": "Robin@123"
+    },
+    {
+      "id": 7,
+      "name": "Nicole Boyd",
+      "email": "nicole@123.com",
+      "number": 9375820353,
+      "password": "Nicole@123"
+    },
+    {
+      "id": 8,
+      "name": "Jason Wagner",
+      "email": "jason@123.com",
+      "number": 9748576874,
+      "password": "Jason@123"
+    },
+    {
+      "id": 9,
+      "name": "David Meyers",
+      "email": "david@123.com",
+      "number": 7684578537,
+      "password": "David@123"
+    },
+    {
+      "id": 10,
+      "name": "Shannon Ochoa",
+      "email": "shannon@123.com",
+      "number": 8354775688,
+      "password": "Shannon@123"
+    },
+    {
+      "id": 11,
+      "name": "Heather Brown",
+      "email": "heather@123.com",
+      "number": 8938746582,
+      "password": "Heather@123"
+    },
+    {
+      "id": 12,
+      "name": "Charles Lopez",
+      "email": "charles@123.com",
+      "number": 9884653634,
+      "password": "Charles@123"
+    },
+    {
+      "id": 13,
+      "name": "Tina Best",
+      "email": "tina@123.com",
+      "number": 8456237654,
+      "password": "Tina@123"
+    },
+    {
+      "name": "Subham Das",
+      "email": "subham@123.com",
+      "number": "9858467643",
+      "password": "Subham@123",
+      "id": 14
+    },
+    {
+      "name": "stranger ",
+      "email": "tinejeg293@bymercy.com",
+      "number": "9858467643",
+      "password": "Sastrtr@123",
+      "id": 15
+    }
+  ]
+}

@@ -5,6 +5,7 @@ import Blogpart from './Blogpart';
 import Aboutus from '../pages/Aboutus';
 import Login from '../pages/Login';
 import Signup from '../pages/Signup';
+import Protected from './Protected';
 
 function Navbar() {
     return (
@@ -78,7 +79,8 @@ function Navbar() {
             <Routes>
                 <Route path = '/' element={<Home/>} />
                 <Route path = '/home' element={<Home/>} />
-                <Route path = '/blogpart' element={<Blogpart/>} />
+
+                <Route path = '/blogpart' element={<Protected Cmp={Blogpart}/>}/>
                 <Route path = '/aboutus' element={<Aboutus/>} />
                 <Route path = '/login' element={<Login/>} />
                 <Route path = '/Signup' element={<Signup/>} />

@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from "styled-components";
+import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-
+// import { toast } from 'react-toastify';
 
 function Login() {
 
@@ -11,6 +12,8 @@ function Login() {
     })
     const [errors, setError] = useState({})
     const [isSubmit, setIsSubmit] = useState(false);
+    const navigate = useNavigate();
+
 
 
     function handleChange(e) {
@@ -21,17 +24,41 @@ function Login() {
     }
 
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
-        setError(Validation(values));
+        setError(Validation(values))
         setIsSubmit(true)
+
+        let result = await fetch("http://localhost:5000/userDetails")
+        let userData = await result.json()
+
+        userData.map(userData => {
+            if (userData.email === values.email && userData.password === values.password) {
+                return navigate("/Blogpart")
+            }
+            else {
+                return errors;
+            }
+        })
+
+        {
+            let result = await fetch("http://localhost:5000/userDetails", {
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+            });
+            result = await result.json();
+            localStorage.setItem("Userdetails", JSON.stringify(result));
+        }
     }
 
     useEffect(() => {
         if (Object.keys(errors).length === 0 & isSubmit) {
-            console.log(values);
+
         }
-    }, [errors])
+    }, [errors, isSubmit])
 
     const Validation = (values) => {
         let errors = {}
@@ -45,7 +72,7 @@ function Login() {
         else if (!regexForEmail.test(values.email)) {
             errors.email = "Email must be like this test@gmail.com "
         }
-        
+
         if (!values.password) {
             errors.password = "Password required!!"
         }
@@ -68,7 +95,7 @@ function Login() {
                                     <span style={{ color: "hsl(218, 81%, 75%)" }}>for your better knowledge</span>
                                 </h1>
                                 <p className="mb-4 opacity-70" style={{ color: "hsl(218, 81%, 85%)" }}>
-                                We also like to include free offers related to our content at the end of each blog post. When we do this, a reader can learn more about the topic we've just taught them about. And, when they fill out a simple form requesting the free resource, they can choose whether or not they'd like to be contacted about one of our products. This allows the reader to feel like they are receiving valuable information without being forced to learn about our products.
+                                    We also like to include free offers related to our content at the end of each blog post. When we do this, a reader can learn more about the topic we've just taught them about. And, when they fill out a simple form requesting the free resource, they can choose whether or not they'd like to be contacted about one of our products. This allows the reader to feel like they are receiving valuable information without being forced to learn about our products.
                                 </p>
                             </div>
 
@@ -83,36 +110,36 @@ function Login() {
                                                 {/* <div className="col-md-6 mb-4">
                                                     <div className="form-outline">
                                                         <input type="text" id="form3Example1" className="form-control" />
-                                                        <label className="form-label" for="form3Example1">First name</label>
+                                                        <label className="form-label" htmlFor="form3Example1">First name</label>
                                                     </div>
                                                 </div>
                                                 <div className="col-md-6 mb-4">
                                                     <div className="form-outline">
                                                         <input type="text" id="form3Example2" className="form-control" />
-                                                        <label className="form-label" for="form3Example2">Last name</label>
+                                                        <label className="form-label" htmlFor="form3Example2">Last name</label>
                                                     </div>
                                                 </div> */}
                                                 {/* <div className="col-md-12 mb-4">
                                                     <div className="form-outline">
                                                         <input type="text" id="form3Example1" className="form-control" />
-                                                        <label className="form-label" for="form3Example1">Name</label>
+                                                        <label className="form-label" htmlFor="form3Example1">Name</label>
                                                     </div>
                                                 </div> */}
                                             </div>
-                                            {Object.keys(errors).length === 0 & isSubmit ? (<div class="alert alert-success" role="alert">Successfully login!!</div>) : (<div class="alert alert-info" role="alert">Please enter required details to Sign in !!</div>)}
+                                            {isSubmit ? Object.keys(errors).length === 0 ? (<div className="alert alert-success" role="alert">Successfully login!!</div>) : (<div className="alert alert-danger">Error</div>) : (<div className="alert alert-info" role="alert">Please enter required details to Sign in !!</div>)}
 
                                             {/* <pre>{JSON.stringify(values, undefined, 2)}</pre> */}
 
                                             <div className="form-outline mb-4">
+                                                <label className="form-label" htmlFor="form3Example3">Email address </label>
                                                 <input type="text" placeholder="Email ID" id="form3Example3" className="form-control" name='email' value={values.email} onChange={handleChange} />
-                                                <p style={{color:'#ad1fff'}}>{errors.email}</p>
-                                                <label className="form-label" for="form3Example3">Email address </label>
+                                                <p style={{ color: '#ad1fff' }}>{errors.email}</p>
                                             </div>
 
                                             <div className="form-outline mb-4">
+                                                <label className="form-label" htmlFor="form3Example4">Password</label>
                                                 <input type="password" placeholder="Password" id="form3Example4" className="form-control" name='password' value={values.password} onChange={handleChange} />
-                                                <p style={{color:'#ad1fff'}}>{errors.password}</p>
-                                                <label className="form-label" for="form3Example4">Password</label>
+                                                <p style={{ color: '#ad1fff' }}>{errors.password}</p>
                                             </div>
 
 
@@ -122,7 +149,7 @@ function Login() {
                                             </button>
 
                                             <div>
-                                                Don't have an account yet? 
+                                                Don't have an account yet?
                                                 <a href='/Signup'> Sign Up</a>
                                             </div>
 

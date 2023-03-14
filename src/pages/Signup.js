@@ -1,17 +1,20 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from "styled-components";
-import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Signup() {
 
     const [values, setValues] = useState({
-        name:"",
+        name: "",
         email: "",
-        number:"",
+        number: "",
         password: ""
     })
     const [errors, setError] = useState({})
     const [isSubmit, setIsSubmit] = useState(false);
+    // const [isAlreadyUser, setIsAlreadyUser] = useState(false);
+    const navigate = useNavigate();
+
 
 
     function handleChange(e) {
@@ -22,17 +25,38 @@ function Signup() {
     }
 
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
         setError(Validation(values));
         setIsSubmit(true)
-    }
+
+        // let result = await fetch("http://localhost:5000/userDetails")
+        // let userData = await result.json()
+        // console.log(userData);
+        {
+            let result = await fetch("http://localhost:5000/userDetails", {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify(values)
+            });
+            result = await result.json();
+            localStorage.setItem("Userdetails", JSON.stringify(result));
+            navigate("/Login")
+        }
+    }   
 
     useEffect(() => {
         if (Object.keys(errors).length === 0 & isSubmit) {
             console.log(values);
         }
-    }, [errors])
+    }, [errors, isSubmit, values]
+        // else if(Object.keys(values.email) ===)
+    )
+
+
 
     const Validation = (values) => {
         let errors = {}
@@ -101,40 +125,40 @@ function Signup() {
                                                 {/* <div className="col-md-6 mb-4">
                                                     <div className="form-outline">
                                                         <input type="text" id="form3Example1" className="form-control" />
-                                                        <label className="form-label" for="form3Example1">First name</label>
+                                                        <label className="form-label" htmlFor="form3Example1">First name</label>
                                                     </div>
                                                 </div>
                                                 <div className="col-md-6 mb-4">
                                                     <div className="form-outline">
                                                         <input type="text" id="form3Example2" className="form-control" />
-                                                        <label className="form-label" for="form3Example2">Last name</label>
+                                                        <label className="form-label" htmlFor="form3Example2">Last name</label>
                                                     </div>
                                                 </div> */}
                                                 <div className="col-md-12 mb-4">
                                                     <div className="form-outline">
-                                                        <input type="text" placeholder="Name" id="form3Example1" className="form-control" name='name' value={values.name} onChange={handleChange}/>
-                                                <p style={{color:'#ad1fff'}}>{errors.name}</p>
-                                                        <label className="form-label" for="form3Example1">Name</label>
+                                                        <label className="form-label" htmlFor="form3Example1">Name</label>
+                                                        <input type="text" placeholder="Name" id="form3Example1" className="form-control" name='name' value={values.name} onChange={handleChange} />
+                                                        <p style={{ color: '#ad1fff' }}>{errors.name}</p>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div className="form-outline mb-4">
+                                                <label className="form-label" htmlFor="form3Example3">Email address</label>
                                                 <input type="text" placeholder="Email ID" id="form3Example3" className="form-control" name='email' value={values.email} onChange={handleChange} />
-                                                <p style={{color:'#ad1fff'}}>{errors.email}</p>
-                                                <label className="form-label" for="form3Example3">Email address</label>
+                                                <p style={{ color: '#ad1fff' }}>{errors.email}</p>
                                             </div>
 
                                             <div className="form-outline mb-4">
+                                                <label className="form-label" htmlFor="form3Example4">Mobile Number</label>
                                                 <input type="text" placeholder="Mobile Number" id="form3Example4" className="form-control" name='number' value={values.number} onChange={handleChange} />
-                                                <p style={{color:'#ad1fff'}}>{errors.number}</p>
-                                                <label className="form-label" for="form3Example4">Mobile Number</label>
+                                                <p style={{ color: '#ad1fff' }}>{errors.number}</p>
                                             </div>
 
                                             <div className="form-outline mb-4">
-                                                <input type="password" placeholder="Password" id="form3Example5" className="form-control" name='password' value={values.password} onChange={handleChange}/>
-                                                <p style={{color:'#ad1fff'}}>{errors.password}</p>
-                                                <label className="form-label" for="form3Example5">Password</label>
+                                                <label className="form-label" htmlFor="form3Example5">Password</label>
+                                                <input type="password" placeholder="Password" id="form3Example5" className="form-control" name='password' value={values.password} onChange={handleChange} />
+                                                <p style={{ color: '#ad1fff' }}>{errors.password}</p>
                                             </div>
 
 
