@@ -37,7 +37,7 @@ function Login() {
                 return navigate("/Blogpart")
             }
             else {
-                return errors;
+                return setError({...errors, inValid:""});
             }
         })
 
