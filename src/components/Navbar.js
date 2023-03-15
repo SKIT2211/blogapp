@@ -1,17 +1,18 @@
 import React from 'react'
-import {Link , BrowserRouter, Routes, Route} from 'react-router-dom';
-import Home from '../pages/Home'
-import Blogpart from './Blogpart';
-import Aboutus from '../pages/Aboutus';
-import Login from '../pages/Login';
-import Signup from '../pages/Signup';
-import Protected from './Protected';
+import {Link ,useNavigate} from 'react-router-dom';
+
 
 function Navbar() {
+    
+    const navigate = useNavigate()
+
+    const logoutHandler = () => {
+        localStorage.removeItem("userDetails")
+        navigate("/Login")
+    }
+
     return (
         <>
-    <BrowserRouter>
-        
             <nav className="navbar navbar-expand-lg navbar-light bg-light border border-info rounded">
                 <div className="container-fluid">
                     <Link to="/home" className="navbar-brand">
@@ -66,7 +67,7 @@ function Navbar() {
                                     aria-labelledby="navbarDropdownMenuAvatar"
                                 >
                                     <li>
-                                        <a className="dropdown-item" href="/login">Logout</a>
+                                        <button className="dropdown-item" onClick={logoutHandler} >Logout</button>
                                     </li>
                                 </ul>
                             </div>
@@ -75,20 +76,6 @@ function Navbar() {
                     </div>
                 </div>
             </nav>
-
-            <Routes>
-                <Route path = '/' element={<Home/>} />
-                <Route path = '/home' element={<Home/>} />
-
-                <Route path = '/blogpart' element={<Protected Cmp={Blogpart}/>}/>
-                <Route path = '/aboutus' element={<Aboutus/>} />
-                <Route path = '/login' element={<Login/>} />
-                <Route path = '/Signup' element={<Signup/>} />
-
-
-            </Routes>
-    </BrowserRouter>
-
         </>
     )
 }

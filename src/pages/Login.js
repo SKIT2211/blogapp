@@ -12,6 +12,7 @@ function Login() {
     })
     const [errors, setError] = useState({})
     const [isSubmit, setIsSubmit] = useState(false);
+    const [isLogin, setIsLogin] = useState(false);
     const navigate = useNavigate();
 
 
@@ -28,6 +29,7 @@ function Login() {
         e.preventDefault();
         setError(Validation(values))
         setIsSubmit(true)
+        setIsLogin(true)
 
         let result = await fetch("http://localhost:5000/userDetails")
         let userData = await result.json()
@@ -37,7 +39,7 @@ function Login() {
                 return navigate("/Blogpart")
             }
             else {
-                return setError({...errors, inValid:""});
+                return setIsLogin(false);
             }
         })
 
@@ -106,29 +108,7 @@ function Login() {
                                 <div className="card bg-glass">
                                     <div className="card-body px-4 py-5 px-md-5">
                                         <form onSubmit={handleSubmit}>
-                                            <div className="row">
-                                                {/* <div className="col-md-6 mb-4">
-                                                    <div className="form-outline">
-                                                        <input type="text" id="form3Example1" className="form-control" />
-                                                        <label className="form-label" htmlFor="form3Example1">First name</label>
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-6 mb-4">
-                                                    <div className="form-outline">
-                                                        <input type="text" id="form3Example2" className="form-control" />
-                                                        <label className="form-label" htmlFor="form3Example2">Last name</label>
-                                                    </div>
-                                                </div> */}
-                                                {/* <div className="col-md-12 mb-4">
-                                                    <div className="form-outline">
-                                                        <input type="text" id="form3Example1" className="form-control" />
-                                                        <label className="form-label" htmlFor="form3Example1">Name</label>
-                                                    </div>
-                                                </div> */}
-                                            </div>
-                                            {isSubmit ? Object.keys(errors).length === 0 ? (<div className="alert alert-success" role="alert">Successfully login!!</div>) : (<div className="alert alert-danger">Error</div>) : (<div className="alert alert-info" role="alert">Please enter required details to Sign in !!</div>)}
-
-                                            {/* <pre>{JSON.stringify(values, undefined, 2)}</pre> */}
+                                             {Object.keys(errors).length === 0 && isSubmit && isLogin ? (<div className="alert alert-success" role="alert">Successfully login!!</div>) : (<div className="alert alert-info" role="alert">Please enter required details to Sign in !!</div>)}
 
                                             <div className="form-outline mb-4">
                                                 <label className="form-label" htmlFor="form3Example3">Email address </label>

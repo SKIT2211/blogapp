@@ -53,7 +53,6 @@ function Signup() {
             console.log(values);
         }
     }, [errors, isSubmit, values]
-        // else if(Object.keys(values.email) ===)
     )
 
 
