@@ -5,7 +5,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import { TextField } from '@mui/material';
 
-export default function AlertDialog({open,handleClose,data,onChange,handleFormSubmit}) {
+export default function BlogDialog({open,handleClose,data,onChange,handleFormSubmit}) {
   
     const {id,title,description,author,category}=data
   return (

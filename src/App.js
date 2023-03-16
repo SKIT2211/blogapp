@@ -7,6 +7,7 @@ import Blogpart from '../src/components/Blogpart';
 import Aboutus from '../src/pages/Aboutus';
 import Login from '../src/pages/Login';
 import Signup from '../src/pages/Signup';
+import BlogDetails from './components/BlogDetails';
 // import Protected from '../src/components/Protected';
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
           <Route path='/aboutus' element={<Aboutus />} />
           <Route path='/login' element={<Login />} />
           <Route path='/Signup' element={<Signup />} />
-
+          <Route path='/blogs/:id' element={<BlogDetails />} />
 
         </Routes>
       </BrowserRouter>
