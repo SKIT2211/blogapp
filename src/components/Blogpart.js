@@ -34,7 +34,7 @@ function Blogpart() {
 
   const [rowData, setRowData] = useState()
   const [columnDefs, setColumnDefs] = useState([
-    { headerName: "ID", field: "id" },
+    { headerName: "ID", field: "id"  },
     { headerName: "Title", field: "title" , cellRenderer: TitleViewer},
     { headerName: "Description", field: "description"},
     { headerName: "Author", field: "author"},
@@ -82,14 +82,14 @@ function Blogpart() {
   }
 
   const handleDelete = (id) => {
-    fetch("http://localhost:5000/Blogs" + `/${id}`,
+    fetch(`http://localhost:5000/Blogs/${id}`,
       { method: 'DELETE' })
       .then(resp => resp.json())
       .then(resp => getUsers())
   }
   const handleFormSubmit = () => {
     if (formData.id) {
-      fetch("http://localhost:5000/Blogs" + `/${formData.id}`,
+      fetch(`http://localhost:5000/Blogs/${formData.id}`,
         {
           method: 'PUT',
           body: JSON.stringify(formData),
