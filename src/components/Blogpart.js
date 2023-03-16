@@ -12,13 +12,18 @@ import { Box } from '@mui/material';
 
 
 function Blogpart() {
+  const [gridApi, setGridApi] = useState(null)
   const [rowData, setRowData] = useState()
   const [columnDefs, setColumnDefs] = useState([
     {headerName: "ID", field:"id"},
     {headerName: "Title", field:"title"},
     {headerName: "Description", field:"description"},
     {headerName: "Author", field:"author"},
-    {headerName: "Category", field:"category"}
+    {headerName: "Category", field:"category"},
+    {headerName:"Actions", field:"id", cellRendererFramework:(params)=><div>
+      <Button variant='outlined' color='primary' onClick={()=>handleUpdate(params.data)}>Update</Button>
+      <Button variant='outlined' color='secondary' onClick={()=>handleDelete(params.value)}>Delete</Button>
+    </div>}
   ])
 
   const [open, setOpen] = React.useState(false);
@@ -29,9 +34,10 @@ function Blogpart() {
 
   const handleClose = () => {
     setOpen(false);
+    setFormData(initialValue);  
   };
-
-  const [formData, setFormData]=useState({title:"",description:'',category:''})
+  const initialValue = {title:"",description:'',author:'',category:''};
+  const [formData, setFormData]=useState(initialValue)
 
   const defaultColDef = {
     sortable : true,
@@ -39,16 +45,65 @@ function Blogpart() {
     floatingFilter : true
   }
 
+  const onGridReady =(params) => {
+    setGridApi(params)
+  }
+
   useEffect(() => {
-    fetch("http://localhost:5000/Blogs")
-    .then(result => result.json())
-    .then(rowData => setRowData(rowData))
-  }, [])
+    getUsers()
+  },[])
+    const getUsers=()=>{
+      fetch("http://localhost:5000/Blogs")
+      .then(result => result.json())
+      .then(rowData => setRowData(rowData))
+
+    }
 
   const onChange=(e)=>{
     const {value,id}=e.target
 
     setFormData({...formData,[id]:value})
+  }
+
+  const handleUpdate=(oldData) =>{
+    setFormData(oldData)
+    handleClickOpen()
+  }
+
+  const handleDelete=(id) =>{
+    fetch("http://localhost:5000/Blogs"+`/${id}`,
+      {method:'DELETE'})
+      .then(resp=>resp.json())
+      .then(resp=> getUsers())
+  }
+  const handleFormSubmit=()=> {
+    if(formData.id){
+      fetch("http://localhost:5000/Blogs"+`/${formData.id}`,
+      {method:'PUT',
+      body:JSON.stringify(formData),
+      headers:{
+        'content-type':'application/json'
+      }})
+      .then(resp=>resp.json())
+      .then(resp=>{
+        handleClose()
+        getUsers()
+       })
+    }
+
+    else{
+    fetch("http://localhost:5000/Blogs",
+      {method:'POST',
+      body:JSON.stringify(formData),
+      headers:{
+        'content-type':'application/json'
+      }})
+      .then(resp=>resp.json())
+      .then(resp=>{
+        handleClose()
+        getUsers()
+       })
+    }
   }
     return (
       <>
@@ -56,12 +111,12 @@ function Blogpart() {
       <Box align="right">
         <Button variant='contained' color='primary' onClick={handleClickOpen}>Add Blog</Button>
       </Box>
-      <AlertDialog open={open} handleClose={handleClose} data={formData} onChange={onChange}/>
+      <AlertDialog open={open} handleClose={handleClose} data={formData} onChange={onChange} handleFormSubmit={handleFormSubmit}/>
       </div>
       <Wrapper>
       
-      <div className="ag-theme-alpine" style={{width: 1030, height: 500, margin:'0 auto'}}>
-        <AgGridReact rowData={rowData} columnDefs={columnDefs} animateRows={true} defaultColDef={defaultColDef}> </AgGridReact>
+      <div className="ag-theme-alpine" style={{width: 1250, height: 500, margin:'0 auto'}}>
+        <AgGridReact rowData={rowData} columnDefs={columnDefs} animateRows={true} defaultColDef={defaultColDef} onGridReady={onGridReady}> </AgGridReact>
       </div>
       </Wrapper>
       </>
