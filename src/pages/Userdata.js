@@ -24,7 +24,7 @@ function Userdata() {
     {headerName: "Role", field:"role"},
     {
       headerName: "Actions", field: "id", cellRendererFramework: (params) => <div>
-        <Button variant='outlined' color='primary' > Role</Button>
+        {/* <Button variant='outlined' color='primary'  > Role</Button> */}
         <Button variant='outlined' color='secondary' onClick={()=> handleDelete(params.value)}>Delete</Button>
       </div>
     }
@@ -45,7 +45,23 @@ function Userdata() {
       .then(rowData => setRowData(rowData))
 
   }
+  // const changeRole = (id) => {
 
+
+  //   let payload = {
+  //     role:"Admin"
+  //   }
+  //   fetch("http://localhost:5000/UserDetails" + `/${id}`,
+  //     { 
+  //       method: 'PUT',
+  //       body: JSON.stringify(role),
+  //       headers: {
+  //         'content-type': 'application/json'
+  //       }
+  //    })
+  //     .then(resp => resp.json())
+  //     .then(resp => getUsers())
+  // }
 
   const handleDelete = (id) => {
     fetch("http://localhost:5000/UserDetails" + `/${id}`,

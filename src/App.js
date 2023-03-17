@@ -8,25 +8,29 @@ import Aboutus from '../src/pages/Aboutus';
 import Login from '../src/pages/Login';
 import Signup from '../src/pages/Signup';
 import BlogDetails from './components/BlogDetails';
-// import Protected from '../src/components/Protected';
+import AdminNavbar from './components/AdminNavbar';
+import Userdata from './pages/Userdata';
+import Protected from './components/Protected';
+let user =JSON.parse(localStorage.getItem("Loggedinuser"))
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <Navbar />
-
-
+      {user?.role === "Admin" ? <AdminNavbar /> : <Navbar />}
+    
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/home' element={<Home />} />
-
-          <Route path='/blogpart' element={<Blogpart />} />
           <Route path='/aboutus' element={<Aboutus />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/Signup' element={<Signup />} />
+
+          
+          <Route path='/blogpart' element={<Blogpart />} />
           <Route path='/blogs/:id' element={<BlogDetails />} />
 
+          <Route path='/Userdetails' element={<Userdata />} /> 
+          <Route path='/login' element={<Login />} />
+          <Route path='/Signup' element={<Signup />} />
         </Routes>
       </BrowserRouter>
     </>

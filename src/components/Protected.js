@@ -6,10 +6,13 @@ function Protected(props) {
     let navigate = useNavigate();
 
     useEffect(() => {
-        if (!localStorage.getItem("Userdetails")) {
+        if (!localStorage.getItem("Loggedinuser")) {
             navigate("/Login")
             return 
         }
+        // else{
+        //   navigate("/Blogpart")
+        // }
         
     }, []);
 

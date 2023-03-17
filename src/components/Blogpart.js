@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, {  useEffect, useState } from 'react'
 import styled from "styled-components";
 import {Link } from 'react-router-dom';
 import { AgGridReact } from 'ag-grid-react';
@@ -7,9 +7,7 @@ import 'ag-grid-community/styles/ag-theme-alpine.css';
 import BlogDialog from './BlogDialog';
 import Button from '@mui/material/Button';
 import { Box } from '@mui/material';
-// import CloseIcon from '@mui/icons-material/Close';
-// import { Modal } from '@mui/material';
-
+let user =JSON.parse(localStorage.getItem("Loggedinuser"))
 
 
 function Blogpart() {
@@ -22,10 +20,12 @@ function Blogpart() {
     flex: 2, filter: true,
     floatingFilter: true
   }
-  const TitleViewer = (pdata) => {
 
+  
+  const TitleViewer = (pdata) => {
     return(
       <>
+
       <Link to={`/blogs/${pdata.data.id}`} >{pdata.value}</Link>
       
       </>
@@ -39,11 +39,21 @@ function Blogpart() {
     { headerName: "Description", field: "description"},
     { headerName: "Author", field: "author"},
     { headerName: "Category", field: "category" },
+    
     {
-      headerName: "Actions", field: "id", cellRendererFramework: (params) => <div>
-        <Button variant='outlined' color='primary' onClick={() => handleUpdate(params.data)}>Update</Button>
-        <Button variant='outlined' color='secondary' onClick={() => handleDelete(params.value)}>Delete</Button>
-      </div>
+      headerName: "Actions", field: "id", cellRendererFramework: (params) => 
+      {
+        if(user?.role === "Admin") {
+          return (
+              <div>
+                <Button variant='outlined' color='primary' onClick={() => handleUpdate(params.data)}>Update</Button>
+                <Button variant='outlined' color='secondary' onClick={() => handleDelete(params.value)}>Delete</Button>
+              </div> 
+          );
+        }else{
+          return(<div></div>);
+        }
+      }
     }
   ])
 
@@ -127,7 +137,9 @@ function Blogpart() {
     <>
       <div style={{ margin: "10px" }}>
         <Box align="right">
+        {user?.role === "Admin" ?
           <Button variant='contained' color='primary' onClick={handleClickOpen}>Add Blog</Button>
+          : <div></div>}
         </Box>
         <BlogDialog open={open} handleClose={handleClose} data={formData} onChange={onChange} handleFormSubmit={handleFormSubmit} />
       </div>

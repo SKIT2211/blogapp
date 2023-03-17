@@ -111,6 +111,14 @@
       "password": "Subham@123",
       "id": 14,
       "role": "User"
+    },
+    {
+      "name": "Hetakshi",
+      "email": "hetaxi@123.com",
+      "number": "35647657687954",
+      "password": "Hetu@123",
+      "id": 15,
+      "role":"User"
     }
   ],
   "Blogs": [

@@ -34,25 +34,19 @@ function Login() {
         let result = await fetch("http://localhost:5000/userDetails")
         let userData = await result.json()
 
-        userData.map(userData => {
+       let user = userData.filter(userData => {
             if (userData.email === values.email && userData.password === values.password) {
-                return navigate("/Blogpart")
+                return userData
             }
             else {
-                return setIsLogin(false);
+                return null
             }
         })
+        if (user.length> 0){
+            let loginUser = user[0]
+            localStorage.setItem("Loggedinuser", JSON.stringify(loginUser));
+            navigate("/Blogpart")
 
-        {
-            let result = await fetch("http://localhost:5000/userDetails", {
-                method: 'GET',
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                },
-            });
-            result = await result.json();
-            localStorage.setItem("Userdetails", JSON.stringify(result));
         }
     }
 
