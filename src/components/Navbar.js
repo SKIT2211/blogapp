@@ -12,6 +12,7 @@ function Navbar() {
     const logoutHandler = () => {
         localStorage.removeItem("Loggedinuser")
         navigate("/Login")
+        window.location.reload();
     }
 
     return (

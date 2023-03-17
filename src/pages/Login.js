@@ -30,6 +30,7 @@ function Login() {
         setError(Validation(values))
         setIsSubmit(true)
         setIsLogin(true)
+        
 
         let result = await fetch("http://localhost:5000/userDetails")
         let userData = await result.json()
@@ -46,6 +47,7 @@ function Login() {
             let loginUser = user[0]
             localStorage.setItem("Loggedinuser", JSON.stringify(loginUser));
             navigate("/Blogpart")
+            window.location.reload();
 
         }
     }

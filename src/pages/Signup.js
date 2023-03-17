@@ -29,10 +29,7 @@ function Signup() {
         e.preventDefault();
         setError(Validation(values));
         setIsSubmit(true)
-
-        // let result = await fetch("http://localhost:5000/userDetails")
-        // let userData = await result.json()
-        // console.log(userData);
+        
         {
             let result = await fetch("http://localhost:5000/userDetails", {
                 method: 'POST',
