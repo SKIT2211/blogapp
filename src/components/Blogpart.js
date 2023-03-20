@@ -21,11 +21,7 @@ function Blogpart() {
     floatingFilter: true,
     resizable: true
   };
-
-  // const checkLoginOrNot = () => {
-  //   {user ?  true : false}
-
-  // }
+  
   const TitleViewer = (pdata) => {
     if (user) {
       return (
@@ -114,11 +110,12 @@ function Blogpart() {
     handleClickOpen();
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = (id) => {const confirm= window.confirm("Are you sure you want to delete this row",id)
+  if(confirm){
     fetch(`http://localhost:5000/Blogs/${id}`, { method: "DELETE" })
       .then((resp) => resp.json())
       .then((resp) => getUsers());
-  };
+  }};
   const handleFormSubmit = () => {
     if (formData.id) {
       fetch(`http://localhost:5000/Blogs/${formData.id}`, {

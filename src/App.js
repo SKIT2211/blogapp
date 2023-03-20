@@ -8,10 +8,10 @@ import Aboutus from '../src/pages/Aboutus';
 import Login from '../src/pages/Login';
 import Signup from '../src/pages/Signup';
 import BlogDetails from './components/BlogDetails';
+import Myblogs from './components/Myblogs';
 import AdminNavbar from './components/AdminNavbar';
 import Userdata from './pages/Userdata';
 import Protected from './components/Protected';
-// import Protected from './components/Protected';
 let user =JSON.parse(localStorage.getItem("Loggedinuser"))
 
 function App() {
@@ -27,6 +27,10 @@ function App() {
 
           <Route path='/blogpart' element={<Blogpart /> } />
           <Route path='/blogs/:id' element={user?<BlogDetails />:<Login />} />
+
+          <Route path='/myblogs' element={<Myblogs /> } />
+
+
 
           <Route path='/Userdetails' element={<Protected><Userdata /></Protected>} /> 
           <Route path='/login' element={user?<Home/> :<Login />} />
