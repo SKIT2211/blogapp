@@ -9,12 +9,11 @@
       "role": "Admin"
     },
     {
-      "id": 2,
       "name": "Chirag Vaghasiya",
       "email": "chirag@123.com",
       "number": 8349752965,
-      "password": "Chirag@123",
-      "role": "User"
+      "role": "User",
+      "id": 2
     },
     {
       "id": 3,
@@ -33,20 +32,18 @@
       "role": "User"
     },
     {
-      "id": 5,
       "name": "Keith King",
       "email": "keith@123.com",
       "number": 8345676237,
-      "password": "Keith@123",
-      "role": "User"
+      "role": "User",
+      "id": 5
     },
     {
-      "id": 6,
       "name": "Robin Patterson",
       "email": "robin@123.com",
       "number": 9875457548,
-      "password": "Robin@123",
-      "role": "User"
+      "role": "User",
+      "id": 6
     },
     {
       "id": 7,
@@ -113,12 +110,11 @@
       "role": "User"
     },
     {
-      "name": "Hetakshi",
+      "name": "Hetaxi",
       "email": "hetaxi@123.com",
       "number": "35647657687954",
-      "password": "Hetu@123",
-      "id": 15,
-      "role":"User"
+      "role": "User",
+      "id": 15
     }
   ],
   "Blogs": [

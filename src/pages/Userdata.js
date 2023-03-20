@@ -6,6 +6,9 @@ import 'ag-grid-community/styles/ag-theme-alpine.css';
 import Button from '@mui/material/Button';
 
 
+let user =JSON.parse(localStorage.getItem("Loggedinuser"))
+
+
 function Userdata() {
 
   const [gridApi, setGridApi] = useState(null)
@@ -13,7 +16,7 @@ function Userdata() {
   const defaultColDef = {
     sortable: true,
     flex: 2, filter: true,
-    floatingFilter: true
+    floatingFilter: true, resizable: true
   }
   const [rowData, setRowData] = useState()
   const [columnDefs, setColumnDefs] = useState([
@@ -24,7 +27,7 @@ function Userdata() {
     {headerName: "Role", field:"role"},
     {
       headerName: "Actions", field: "id", cellRendererFramework: (params) => <div>
-        {/* <Button variant='outlined' color='primary'  > Role</Button> */}
+        <Button variant='outlined' color='primary' onClick={()=> changeRole(params.data)} > Role</Button>
         <Button variant='outlined' color='secondary' onClick={()=> handleDelete(params.value)}>Delete</Button>
       </div>
     }
@@ -39,29 +42,33 @@ function Userdata() {
   useEffect(() => {
     getUsers()
   }, [])
+  
   const getUsers = () => {
     fetch("http://localhost:5000/UserDetails")
       .then(result => result.json())
       .then(rowData => setRowData(rowData))
 
   }
-  // const changeRole = (id) => {
-
-
-  //   let payload = {
-  //     role:"Admin"
-  //   }
-  //   fetch("http://localhost:5000/UserDetails" + `/${id}`,
-  //     { 
-  //       method: 'PUT',
-  //       body: JSON.stringify(role),
-  //       headers: {
-  //         'content-type': 'application/json'
-  //       }
-  //    })
-  //     .then(resp => resp.json())
-  //     .then(resp => getUsers())
-  // }
+  const changeRole = (data) => {
+    
+     let payload = {
+      name: data.name,
+      email: data.email,
+      number: data.number,
+      role : data.role === "Admin" ? "User" : "Admin"
+    }
+    fetch("http://localhost:5000/UserDetails" + `/${data.id}`,
+    { 
+          method: 'PUT',
+          body: JSON.stringify(payload),
+          headers: {
+            'content-type': 'application/json'
+          }
+  })
+    .then(result => result.json())
+    .then(resp=>
+      getUsers())
+  }
 
   const handleDelete = (id) => {
     fetch("http://localhost:5000/UserDetails" + `/${id}`,

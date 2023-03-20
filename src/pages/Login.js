@@ -29,7 +29,7 @@ function Login() {
         e.preventDefault();
         setError(Validation(values))
         setIsSubmit(true)
-        setIsLogin(true)
+        // setIsLogin(true)
         
 
         let result = await fetch("http://localhost:5000/userDetails")
@@ -40,7 +40,7 @@ function Login() {
                 return userData
             }
             else {
-                return null
+                return setIsLogin(false)
             }
         })
         if (user.length> 0){

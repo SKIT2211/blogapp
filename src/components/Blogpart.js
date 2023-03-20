@@ -19,6 +19,7 @@ function Blogpart() {
     flex: 2,
     filter: true,
     floatingFilter: true,
+    resizable: true
   };
 
   // const checkLoginOrNot = () => {
@@ -150,6 +151,8 @@ function Blogpart() {
 
   return (
     <>
+    <Wrapper>
+      <div className="all-background">
       <div style={{ margin: "10px" }}>
         <Box align="right">
           {user?.role === "Admin" ? (
@@ -172,10 +175,10 @@ function Blogpart() {
           handleFormSubmit={handleFormSubmit}
         />
       </div>
-      <Wrapper>
+      
         <div
           className="ag-theme-alpine"
-          style={{ width: 1250, height: 500, margin: "0 auto" }}
+          style={{ width: 1300, height: 500, margin: "0 auto" }}
         >
           <AgGridReact
             rowData={rowData}
@@ -188,6 +191,7 @@ function Blogpart() {
           >
             {" "}
           </AgGridReact>
+        </div>
         </div>
       </Wrapper>
     </>
@@ -206,6 +210,28 @@ const Wrapper = styled.section`
 
       --ag-font-size: 17px;
       // --ag-font-family: monospace;
+    }
+
+    {
+      .all-background{
+        background-color: hsl(218, 41%, 15%);
+    background-image: radial-gradient(
+        650px circle at 0% 0%,
+        hsl(218, 41%, 35%) 15%,
+        hsl(218, 41%, 30%) 35%,
+        hsl(218, 41%, 20%) 75%,
+        hsl(218, 41%, 19%) 80%,
+        transparent 100%
+      ),
+      radial-gradient(
+        1250px circle at 100% 100%,
+        hsl(218, 41%, 45%) 15%,
+        hsl(218, 41%, 30%) 35%,
+        hsl(218, 41%, 20%) 75%,
+        hsl(218, 41%, 19%) 80%,
+        transparent 100%
+      );
+      }
     }
   }
 `;

@@ -11,6 +11,7 @@ import BlogDetails from './components/BlogDetails';
 import AdminNavbar from './components/AdminNavbar';
 import Userdata from './pages/Userdata';
 import Protected from './components/Protected';
+// import Protected from './components/Protected';
 let user =JSON.parse(localStorage.getItem("Loggedinuser"))
 
 function App() {
@@ -24,12 +25,11 @@ function App() {
           <Route path='/home' element={<Home />} />
           <Route path='/aboutus' element={<Aboutus />} />
 
-          
-          <Route path='/blogpart' element={<Blogpart />} />
-          <Route path='/blogs/:id' element={<BlogDetails />} />
+          <Route path='/blogpart' element={<Blogpart /> } />
+          <Route path='/blogs/:id' element={user?<BlogDetails />:<Login />} />
 
-          <Route path='/Userdetails' element={<Userdata />} /> 
-          <Route path='/login' element={<Login />} />
+          <Route path='/Userdetails' element={<Protected><Userdata /></Protected>} /> 
+          <Route path='/login' element={user?<Home/> :<Login />} />
           <Route path='/Signup' element={<Signup />} />
         </Routes>
       </BrowserRouter>

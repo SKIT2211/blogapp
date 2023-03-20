@@ -1,10 +1,26 @@
 import { Avatar } from '@mui/material';
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 let user = JSON.parse(localStorage.getItem("Loggedinuser"))
 
 
 function Navbar() {
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     const navigate = useNavigate()
 
@@ -54,12 +70,40 @@ function Navbar() {
                                         aria-labelledby="navbarDropdownMenuAvatar"
                                     >
                                         <li>
-                                            <button className="dropdown-item" onClick={logoutHandler} >Logout</button>
+                                        <Button variant="outlined" onClick={handleClickOpen}>
+                                                Profile
+                                            </Button>
+                                            <Dialog
+                                                open={open}
+                                                onClose={handleClose}
+                                                aria-labelledby="alert-dialog-title"
+                                                aria-describedby="alert-dialog-description"
+                                            >
+                                                <DialogTitle id="alert-dialog-title">
+                                                    My Profile
+                                                    <Avatar alt={user.name} src="..." style={{marginLeft: '200px'}}/>
+                                                </DialogTitle>
+                                                <DialogContent>
+                                                    <DialogContentText id="alert-dialog-description">
+                                                        <div>Name : {user.name}</div>
+                                                        <div>Email : {user.email}</div>
+                                                        <div>Number : {user.number}</div>
+                                                        <div>Your Password : {user.password}</div>
+                                                        <div>Role : {user.role}</div>
+                                                    </DialogContentText>
+                                                </DialogContent>
+                                                <DialogActions>
+                                                    <Button onClick={handleClose}>Close</Button>
+                                                </DialogActions>
+                                            </Dialog>
+                                        </li>
+                                        <li>
+                                            <Button  variant="outlined" onClick={logoutHandler} >Logout</Button>
                                         </li>
                                     </ul>
                                 </div>
 
-                                    : <button><Link to="/Login" className=" btn-outline-info"> Login</Link></button>}
+                                    : <Button variant="outlined"><Link to="/Login" className=" btn-outline-info"> Login</Link></Button>}
                             </div>
                             {/* <div className="dropdown">
                                 <a
