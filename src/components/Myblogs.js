@@ -20,26 +20,29 @@ function Myblogs() {
 
   const [gridApi, setGridApi] = useState(null);
     const [rowData, setRowData] = useState();
-  const [columnDefs, setColumnDefs] = useState([
+  const columnDefs = [
     { headerName: "ID", field: "id" },
     { headerName: "Title", field: "title" },
     { headerName: "Description", field: "description" },
     { headerName: "Author", field: "author" },
-    { headerName: "Category", field: "category" } ]);
+    { headerName: "Category", field: "category" },
+    { headerName: "UserId", field: "userId" },
+  ];
 
 
 
   const onGridReady = (params) => {
     setGridApi(params);
+    
   };
 
     useEffect(() => {
         getUsers();
       }, []);
       const getUsers = () => {
-        fetch("http://localhost:5000/Blogs")
+        fetch(`http://localhost:5000/Blogs`)
           .then((result) => result.json())
-          .then((rowData) => setRowData(rowData));
+          .then((rowData) => setRowData(rowData));       
       };
 
     return (
@@ -63,7 +66,6 @@ function Myblogs() {
             {" "}
           </AgGridReact>
         </div>
-
 
         </div>
       </Wrapper>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Link, Navigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
@@ -40,7 +40,7 @@ function Blogpart() {
   };
 
   const [rowData, setRowData] = useState();
-  const [columnDefs, setColumnDefs] = useState([
+  const columnDefs = [
     { headerName: "ID", field: "id" },
     { headerName: "Title", field: "title", cellRenderer: TitleViewer },
     { headerName: "Description", field: "description" },
@@ -75,7 +75,7 @@ function Blogpart() {
         }
       },
     },
-  ]);
+  ];
 
   const handleClickOpen = () => {
     setOpen(true);

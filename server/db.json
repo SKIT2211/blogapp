@@ -119,6 +119,14 @@
       "password": "Hetaxi@123",
       "role": "User",
       "id": 15
+    },
+    {
+      "name": "Ravi Patel",
+      "email": "ravi@123.com",
+      "number": "9858467643",
+      "password": "Ravi@123",
+      "role": "User",
+      "id": 16
     }
   ],
   "Blogs": [

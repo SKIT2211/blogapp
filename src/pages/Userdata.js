@@ -4,11 +4,11 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+// import Dialog from '@mui/material/Dialog';
+// import DialogActions from '@mui/material/DialogActions';
+// import DialogContent from '@mui/material/DialogContent';
+// import DialogContentText from '@mui/material/DialogContentText';
+// import DialogTitle from '@mui/material/DialogTitle';
 
 
 let user = JSON.parse(localStorage.getItem("Loggedinuser"))
@@ -16,15 +16,15 @@ let user = JSON.parse(localStorage.getItem("Loggedinuser"))
 
 function Userdata() {
 
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  // };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
 
 
   const [gridApi, setGridApi] = useState(null)
@@ -35,54 +35,22 @@ function Userdata() {
     floatingFilter: true, resizable: true
   }
   const [rowData, setRowData] = useState()
-  const [columnDefs, setColumnDefs] = useState([
+  const columnDefs = [
     { headerName: "ID", field: "id" },
     { headerName: "Name", field: "name" },
     { headerName: "Email", field: "email" },
     { headerName: "Number", field: "number" },
     { headerName: "Role", field: "role" },
     {
-      headerName: "Actions", field: "id", cellRendererFramework: (params) => <div>
-        <ul
-                                        className="dropdown-menu dropdown-menu-end"
-                                        aria-labelledby="navbarDropdownMenuAvatar"
-                                    >
-                                      <li>
-        <Button variant='outlined' color='primary' onClick={handleClickOpen} > Role</Button>
-        <Dialog
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
-          <DialogTitle id="alert-dialog-title">
-            Role Change
-          </DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              <div>hello</div>
-              <div>
-                {/* <ul>
-                  <li>Admin</li>
-                  <li>User</li>
-                </ul> */}
-              </div>
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose}>Close</Button>
-          </DialogActions>
-        </Dialog>
-        </li>
-        <li>
-        <Button variant='outlined' color='secondary' onClick={() => handleDelete(params.value)}>Delete</Button>
-        </li>
-        </ul>
-      </div>
-    }
-  ])
+      headerName: "Actions", field: "id", cellRendererFramework: (params) => <>
+        <Button variant='outlined' type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Role
+        </Button>
 
-  
+        <Button variant='outlined' color='secondary' onClick={() => handleDelete(params.value)}>Delete</Button>
+      </>
+    }
+  ]
 
   const onGridReady = (params) => {
     setGridApi(params)
@@ -142,6 +110,28 @@ function Userdata() {
             onGridReady={onGridReady}
             pagination={true}
             paginationAutoPageSize={true}> </AgGridReact>
+        </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Change Role</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                  <option selected>Role List</option>
+                  <option value="1">Admin</option>
+                  <option value="2">User</option>
+                </select>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
         </div>
       </Wrapper>
     </>
