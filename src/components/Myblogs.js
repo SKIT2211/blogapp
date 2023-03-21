@@ -4,22 +4,36 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 
+// let user = JSON.parse(localStorage.getItem("Loggedinuser"));
 
-let user = JSON.parse(localStorage.getItem("Loggedinuser"));
+ function Myblogs() {
+   const userIdViewer = async () => {
+        // if(user?.id === )
+        let result = await fetch(`http://localhost:5000/Blogs`)
+        let userData = await result.json()
+        console.log("sss",userData)
+      //  let  user =userData.filter((user1) => user1.value )
+      //  console.log("kkk",user)
 
+    // fetch(`http://localhost:5000/Blogs/${id}`)
+    //   .then((result) => result.json())
+    //   .then((res) => console.log("sds", res));
+  };
+  // return <>
+  //   <div>
+  //   </div>
+  // </>
 
-function Myblogs() {
-
-    const defaultColDef = {
-        sortable: true,
-        flex: 2,
-        filter: true,
-        floatingFilter: true,
-        resizable: true
-      };
+  const defaultColDef = {
+    sortable: true,
+    flex: 2,
+    filter: true,
+    floatingFilter: true,
+    resizable: true,
+  };
 
   const [gridApi, setGridApi] = useState(null);
-    const [rowData, setRowData] = useState();
+  const [rowData, setRowData] = useState();
   const columnDefs = [
     { headerName: "ID", field: "id" },
     { headerName: "Title", field: "title" },
@@ -29,51 +43,48 @@ function Myblogs() {
     { headerName: "UserId", field: "userId" },
   ];
 
-
-
   const onGridReady = (params) => {
     setGridApi(params);
-    
+    // console.log("shhs", userIdViewer());
+
   };
 
-    useEffect(() => {
-        getUsers();
-      }, []);
-      const getUsers = () => {
-        fetch(`http://localhost:5000/Blogs`)
-          .then((result) => result.json())
-          .then((rowData) => setRowData(rowData));       
-      };
+  useEffect(() => {
+    getUsers();
+  }, []);
+  const getUsers = () => {
+    fetch(`http://localhost:5000/Blogs`)
+      .then((result) => result.json())
+      .then((rowData) => setRowData(rowData));
+  };
 
-    return (
-      <>
+  return (
+    <>
       <Wrapper>
         <div className="all-background">
-
-        <div
-          className="ag-theme-alpine"
-          style={{ width: 1300, height: 500, margin: "0 auto" }}
-        >
-          <AgGridReact
-            rowData={rowData}
-            columnDefs={columnDefs}
-            animateRows={true}
-            defaultColDef={defaultColDef}
-            onGridReady={onGridReady}
-            pagination={true}
-            paginationAutoPageSize={true}
+          <div
+            className="ag-theme-alpine"
+            style={{ width: 1300, height: 500, margin: "0 auto" }}
           >
-            {" "}
-          </AgGridReact>
-        </div>
-
+            <AgGridReact
+              rowData={rowData}
+              columnDefs={columnDefs}
+              animateRows={true}
+              defaultColDef={defaultColDef}
+              onGridReady={onGridReady}
+              pagination={true}
+              paginationAutoPageSize={true}
+            >
+              {" "}
+            </AgGridReact>
+          </div>
         </div>
       </Wrapper>
-      </>
-    )
-  }
+    </>
+  );
+}
 
-  const Wrapper = styled.section`
+const Wrapper = styled.section`
    {
     .ag-theme-alpine {
       --ag-foreground-color: rgb(126, 46, 132);
@@ -87,25 +98,25 @@ function Myblogs() {
       // --ag-font-family: monospace;
     }
 
-    {
-      .all-background{
+     {
+      .all-background {
         background-color: hsl(218, 41%, 15%);
-    background-image: radial-gradient(
-        650px circle at 0% 0%,
-        hsl(218, 41%, 35%) 15%,
-        hsl(218, 41%, 30%) 35%,
-        hsl(218, 41%, 20%) 75%,
-        hsl(218, 41%, 19%) 80%,
-        transparent 100%
-      ),
-      radial-gradient(
-        1250px circle at 100% 100%,
-        hsl(218, 41%, 45%) 15%,
-        hsl(218, 41%, 30%) 35%,
-        hsl(218, 41%, 20%) 75%,
-        hsl(218, 41%, 19%) 80%,
-        transparent 100%
-      );
+        background-image: radial-gradient(
+            650px circle at 0% 0%,
+            hsl(218, 41%, 35%) 15%,
+            hsl(218, 41%, 30%) 35%,
+            hsl(218, 41%, 20%) 75%,
+            hsl(218, 41%, 19%) 80%,
+            transparent 100%
+          ),
+          radial-gradient(
+            1250px circle at 100% 100%,
+            hsl(218, 41%, 45%) 15%,
+            hsl(218, 41%, 30%) 35%,
+            hsl(218, 41%, 20%) 75%,
+            hsl(218, 41%, 19%) 80%,
+            transparent 100%
+          );
       }
     }
   }
