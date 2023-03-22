@@ -11,7 +11,7 @@ import "ag-grid-community/styles/ag-theme-alpine.css";
         // if(user?.id === )
         let result = await fetch(`http://localhost:5000/Blogs`)
         let userData = await result.json()
-        console.log("sss",userData)
+        console.log("sss",userData[0])
       //  let  user =userData.filter((user1) => user1.value )
       //  console.log("kkk",user)
 
@@ -45,7 +45,7 @@ import "ag-grid-community/styles/ag-theme-alpine.css";
 
   const onGridReady = (params) => {
     setGridApi(params);
-    // console.log("shhs", userIdViewer());
+    console.log("shhs", userIdViewer());
 
   };
 
