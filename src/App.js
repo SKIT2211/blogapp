@@ -9,7 +9,6 @@ import Login from '../src/pages/Login';
 import Signup from '../src/pages/Signup';
 import BlogDetails from './components/BlogDetails';
 import Myblogs from './components/Myblogs';
-import AdminNavbar from './components/AdminNavbar';
 import Userdata from './pages/Userdata';
 import Protected from './components/Protected';
 let user =JSON.parse(localStorage.getItem("Loggedinuser"))
@@ -18,7 +17,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-      {user?.role === "Admin" ? <AdminNavbar /> : <Navbar />}
+       <Navbar />
     
         <Routes>
           <Route path='/' element={<Home />} />
@@ -29,7 +28,6 @@ function App() {
           <Route path='/blogs/:id' element={user?<BlogDetails />:<Login />} />
 
           <Route path='/myblogs' element={<Myblogs /> } />
-
 
 
           <Route path='/Userdetails' element={<Protected><Userdata /></Protected>} /> 

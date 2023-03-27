@@ -49,7 +49,7 @@ function Signup() {
                 body: JSON.stringify(values)
             });
             resultt = await resultt.json();
-            localStorage.setItem("Userdetails", JSON.stringify(resultt));
+            // localStorage.setItem("Userdetails", JSON.stringify(resultt));
             navigate("/Login")
     }
 
