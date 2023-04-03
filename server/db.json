@@ -13,7 +13,7 @@
       "email": "chirag@123.com",
       "number": 8349752965,
       "password": "Chirag@123",
-      "role": "User",
+      "role": "Admin",
       "id": 2
     },
     {
@@ -25,19 +25,19 @@
       "id": 3
     },
     {
-      "id": 4,
       "name": "Kristin Esparza",
       "email": "kristin@123.com",
       "number": 9642536454,
       "password": "Kristin@123",
-      "role": "User"
+      "role": "Admin",
+      "id": 4
     },
     {
       "name": "Keith King",
       "email": "keith@123.com",
       "number": 8345676237,
       "password": "Keith@123",
-      "role": "User",
+      "role": "Admin",
       "id": 5
     },
     {

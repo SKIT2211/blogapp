@@ -47,7 +47,7 @@ function Login() {
             let loginUser = user[0]
             localStorage.setItem("Loggedinuser", JSON.stringify(loginUser));
             navigate("/Blogpart")
-            window.location.reload();
+            // window.location.reload();
 
         }
     }

@@ -4,14 +4,16 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 
-// let user = JSON.parse(localStorage.getItem("Loggedinuser"));
+let user = JSON.parse(localStorage.getItem("Loggedinuser"));
 
  function Myblogs() {
    const userIdViewer = async () => {
         // if(user?.id === )
-        let result = await fetch(`http://localhost:5000/Blogs`)
+        let result = await fetch(`http://localhost:5000/Blogs/?userId=${user?.id}`)
         let userData = await result.json()
-        console.log("sss",userData[0])
+        console.log(userData);
+        setRowData(userData)
+        // console.log("sdss",userData[10].userId)
       //  let  user =userData.filter((user1) => user1.value )
       //  console.log("kkk",user)
 

@@ -38,8 +38,8 @@ function Navbar() {
 
                 { user?.role === "Admin" ? 
                 <>
-                <button style={{ marginRight: "5px" }} className="btn btn-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-                        A<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z" /></svg>
+                <button style={{ marginRight: "5px" }} className="btn btn-info " data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                        <img src="https://img.icons8.com/ios/1x/line-width.png" alt='img' width={"25px"}></img>
                     </button>
 
                     <div style={{ width: "180px" }} className="offcanvas offcanvas-start" tabIndex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
@@ -74,7 +74,7 @@ function Navbar() {
 
                         <div className="navbar-nav ms-auto ">
                             <div className="navbar-nav">
-                                {user ? <div><Link to="/Login"
+                                {user ? <div><div
 
                                     style={{ textDecoration: 'none' }}
                                     className="dropdown-toggle d-flex align-items-center hidden-arrow"
@@ -83,10 +83,9 @@ function Navbar() {
                                     data-bs-toggle="dropdown"
                                     aria-expanded="false"
                                 >
-
                                 <Avatar alt={user.name} src="..." />
 
-                                </Link>
+                                </div>
                                     <ul
                                         className="dropdown-menu dropdown-menu-end"
                                         aria-labelledby="navbarDropdownMenuAvatar"
@@ -125,44 +124,8 @@ function Navbar() {
                                     </ul>
                                 </div>
 
-                                    : <Button variant="outlined"><Link to="/Login" className=" btn-outline-info"> Login</Link></Button>}
+                                    : <div><Button variant="outlined"><Link to="/Login" className=" btn-outline-info"> Login</Link></Button></div>}
                             </div>
-                            {/* <div className="dropdown">
-                                <a
-                                    style={{ textDecoration: 'none' }}
-                                    className="dropdown-toggle d-flex align-items-center hidden-arrow"
-                                    href="/"
-                                    id="navbarDropdownMenuAvatar"
-                                    role="button"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                                >
-
-                                    <span id="firstName"
-                                        style={{
-
-                                            width: "50px",
-                                            height: "50px",
-                                            borderRadius: "50%",
-                                            backgroundColor: "skyblue",
-                                            fontSize: "25px",
-                                            color: "#fff",
-                                            textAlign: "center",
-                                            lineHeight: "50px",
-                                            margin: "10px 0",
-
-                                        }}>SK</span>
-                                </a>
-                                <ul
-                                    className="dropdown-menu dropdown-menu-end"
-                                    aria-labelledby="navbarDropdownMenuAvatar"
-                                >
-                                    <li>
-                                        <button className="dropdown-item" onClick={logoutHandler} >Logout</button>
-                                    </li>
-                                </ul>
-                            </div> */}
-
                         </div>
                     </div>
                 </div>
