@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { Link} from "react-router-dom";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
@@ -7,24 +8,31 @@ import "ag-grid-community/styles/ag-theme-alpine.css";
 let user = JSON.parse(localStorage.getItem("Loggedinuser"));
 
  function Myblogs() {
-   const userIdViewer = async () => {
-        // if(user?.id === )
+   const userIdBlogViewer = async () => {
+
         let result = await fetch(`http://localhost:5000/Blogs/?userId=${user?.id}`)
         let userData = await result.json()
-        console.log(userData);
-        setRowData(userData)
-        // console.log("sdss",userData[10].userId)
-      //  let  user =userData.filter((user1) => user1.value )
-      //  console.log("kkk",user)
 
-    // fetch(`http://localhost:5000/Blogs/${id}`)
-    //   .then((result) => result.json())
-    //   .then((res) => console.log("sds", res));
+        setRowData(userData)
   };
-  // return <>
-  //   <div>
-  //   </div>
-  // </>
+
+  const TitleViewer = (pdata) => {
+    if (user) {
+      return (
+        <>
+          <Link to={`/blogs/${pdata.data.id}`} >
+            {pdata.value}
+          </Link>
+        </>
+      );
+    }
+    else{
+      return <Link to={`/Login`} >
+      {pdata.value}
+    </Link>
+    }
+  };
+
 
   const defaultColDef = {
     sortable: true,
@@ -38,27 +46,22 @@ let user = JSON.parse(localStorage.getItem("Loggedinuser"));
   const [rowData, setRowData] = useState();
   const columnDefs = [
     { headerName: "ID", field: "id" },
-    { headerName: "Title", field: "title" },
+    { headerName: "Title", field: "title",cellRenderer: TitleViewer  },
     { headerName: "Description", field: "description" },
     { headerName: "Author", field: "author" },
     { headerName: "Category", field: "category" },
-    { headerName: "UserId", field: "userId" },
+    // { headerName: "UserId", field: "userId" },
   ];
 
   const onGridReady = (params) => {
     setGridApi(params);
-    console.log("shhs", userIdViewer());
 
   };
 
   useEffect(() => {
-    getUsers();
+    userIdBlogViewer();
+
   }, []);
-  const getUsers = () => {
-    fetch(`http://localhost:5000/Blogs`)
-      .then((result) => result.json())
-      .then((rowData) => setRowData(rowData));
-  };
 
   return (
     <>

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-// import Blogpart from './Blogpart';
 import Userdata from './pages/Userdata';
 
-// import Navbar from './Navbar';
+
 
 function Protected() {
   let navigate = useNavigate();
@@ -15,7 +14,7 @@ function Protected() {
     if (user?.role === "Admin") {
       setAdmin(true)
     } else {
-      navigate("/Login")
+      navigate("/login")
     }
      
 

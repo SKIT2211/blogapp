@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from "styled-components";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 // import { toast } from 'react-toastify';
 
@@ -32,24 +32,30 @@ function Login() {
         // setIsLogin(true)
         
 
-        let result = await fetch("http://localhost:5000/userDetails")
+        let result = await fetch("http://localhost:9000/users/login" ,{
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(values)
+        });
         let userData = await result.json()
 
-       let user = userData.filter(userData => {
-            if (userData.email === values.email && userData.password === values.password) {
-                return userData
-            }
-            else {
-                return setIsLogin(false)
-            }
-        })
-        if (user.length> 0){
-            let loginUser = user[0]
-            localStorage.setItem("Loggedinuser", JSON.stringify(loginUser));
-            navigate("/Blogpart")
-            // window.location.reload();
-
-        }
+    //    let user = userData
+    //    .filter(userData => {
+    //         if (userData.email === values.email && userData.password === values.password) {
+    //             return userData
+    //         }
+    //         else {
+    //             return setIsLogin(false)
+    //         }
+    //     })
+        // if (userData.length> 0){
+        //     let loginUser = userData[0]
+            localStorage.setItem("Loggedinuser", JSON.stringify(userData));
+            navigate("/blogpart")
+            window.location.reload();
     }
 
     useEffect(() => {
@@ -126,7 +132,7 @@ function Login() {
 
                                             <div>
                                                 Don't have an account yet?
-                                                <a href='/Signup'> Sign Up</a>
+                                                <Link to='/signup'> Sign Up</Link>
                                             </div>
 
                                         </form>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled from "styled-components";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Signup() {
 
@@ -30,7 +30,7 @@ function Signup() {
         setError(Validation(values));
         setIsSubmit(true)
 
-        let result = await fetch("http://localhost:5000/userDetails")
+        let result = await fetch("http://localhost:9000/users/allusers")
         let userData = await result.json()
 
         let user = userData.filter((user1) => user1.email === values.email)
@@ -40,7 +40,7 @@ function Signup() {
             return null
         }
 
-            let resultt = await fetch("http://localhost:5000/userDetails", {
+            let resultt = await fetch("http://localhost:9000/users/register", {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -50,12 +50,12 @@ function Signup() {
             });
             resultt = await resultt.json();
             // localStorage.setItem("Userdetails", JSON.stringify(resultt));
-            navigate("/Login")
+            navigate("/login")
     }
 
     useEffect(() => {
         if (Object.keys(errors).length === 0 & isSubmit) {
-            // console.log(values);
+
         }
     }, [errors, isSubmit, values]
     )
@@ -177,7 +177,7 @@ function Signup() {
 
                                             <div>
                                                 Alreday have an account?
-                                                <a href='/Login'> Sign In</a>
+                                                <Link to='/login'> Sign In</Link>
                                             </div>
                                         </form>
                                     </div>

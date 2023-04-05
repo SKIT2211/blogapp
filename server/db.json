@@ -29,7 +29,7 @@
       "email": "kristin@123.com",
       "number": 9642536454,
       "password": "Kristin@123",
-      "role": "Admin",
+      "role": "User",
       "id": 4
     },
     {
@@ -37,7 +37,7 @@
       "email": "keith@123.com",
       "number": 8345676237,
       "password": "Keith@123",
-      "role": "Admin",
+      "role": "User",
       "id": 5
     },
     {
@@ -249,6 +249,21 @@
       "author": "abc",
       "category": "blog",
       "userId": 3
+    },
+    {
+      "title": "sadfsaawrfs",
+      "description": "fsadfr4effsaf",
+      "author": "fsdaffewgdgd",
+      "category": "afdsafaef",
+      "userId": 2,
+      "id": 16
+    },
+    {
+      "title": "gdsfgsag",
+      "description": "gfagrgaqg",
+      "author": "agfdgdswga",
+      "category": "gergewsgrg",
+      "id": 17
     }
   ]
 }

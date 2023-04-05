@@ -10,7 +10,7 @@ import { Box } from "@mui/material";
 let user = JSON.parse(localStorage.getItem("Loggedinuser"));
 
 function Blogpart() {
-  const initialValue = { title: "", description: "", author: "", category: "" };
+  const initialValue = { title: "", description: "", author: "", category: "", userId: user._id};
   const [formData, setFormData] = useState(initialValue);
   const [gridApi, setGridApi] = useState(null);
   const [open, setOpen] = React.useState(false);
@@ -33,7 +33,7 @@ function Blogpart() {
       );
     }
     else{
-      return <Link to={`/Login`} >
+      return <Link to={`/login`} >
       {pdata.value}
     </Link>
     }
@@ -41,7 +41,7 @@ function Blogpart() {
 
   const [rowData, setRowData] = useState();
   const columnDefs = [
-    { headerName: "ID", field: "id" },
+    { headerName: "ID", field: "_id" },
     { headerName: "Title", field: "title", cellRenderer: TitleViewer },
     { headerName: "Description", field: "description" },
     { headerName: "Author", field: "author" },
@@ -49,7 +49,7 @@ function Blogpart() {
 
     {
       headerName: "Actions",
-      field: "id",
+      field: "_id",
       cellRendererFramework: (params) => {
         if (user?.role === "Admin") {
           return (

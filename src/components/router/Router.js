@@ -26,12 +26,12 @@ function Router() {
               <Route path='/blogpart' element={<Blogpart /> } />
               <Route path='/blogs/:id' element={user?<BlogDetails />:<Login />} />
     
-              <Route path='/myblogs' element={<Myblogs /> } />
+              <Route path='/myblogs' element={<Protected><Myblogs /> </Protected>} />
     
     
               <Route path='/Userdetails' element={<Protected><Userdata /></Protected>} /> 
               <Route path='/login' element={user?<Home/> :<Login />} />
-              <Route path='/Signup' element={<Signup />} />
+              <Route path='/signup' element={<Signup />} />
             </Routes>
           </BrowserRouter>
         </>

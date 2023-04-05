@@ -4,24 +4,9 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import Button from "@mui/material/Button";
-// import Dialog from '@mui/material/Dialog';
-// import DialogActions from '@mui/material/DialogActions';
-// import DialogContent from '@mui/material/DialogContent';
-// import DialogContentText from '@mui/material/DialogContentText';
-// import DialogTitle from '@mui/material/DialogTitle';
-
-let user = JSON.parse(localStorage.getItem("Loggedinuser"));
 
 function Userdata() {
-  // const [open, setOpen] = useState(false);
 
-  // const handleClickOpen = () => {
-  //   setOpen(true);
-  // };
-
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
   const [role, setRole] = useState();
   const [details, setDetails] = useState(null);
 
@@ -36,19 +21,19 @@ function Userdata() {
   };
   const [rowData, setRowData] = useState();
   const columnDefs = [
-    { headerName: "ID", field: "id" },
+    { headerName: "ID", field: "_id" },
     { headerName: "Name", field: "name" },
     { headerName: "Email", field: "email" },
     { headerName: "Number", field: "number" },
     { headerName: "Role", field: "role" },
     {
       headerName: "Actions",
-      field: "id",
+      field: "_id",
       cellRendererFramework: (params) => (
         <>
           <Button
             variant="outlined"
-            color="secondary"
+            color="success"
             onClick={() => changeRole(params.data)}
           >
             <div data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -76,9 +61,10 @@ function Userdata() {
   }, []);
 
   const getUsers = () => {
-    fetch("http://localhost:5000/UserDetails")
+    fetch("http://localhost:9000/users/allusers")
       .then((result) => result.json())
       .then((rowData) => setRowData(rowData));
+      
   };
   const changeRole = (data) => {
     setRole(data?.role);
@@ -93,7 +79,7 @@ function Userdata() {
       password: details.password,
       role: role,
     };
-    fetch(`http://localhost:5000/UserDetails/${details.id}`, {
+    fetch(`http://localhost:9000/users/allusers/${details._id}`, {
       method: "PUT",
       body: JSON.stringify(payload),
       headers: {
@@ -107,13 +93,13 @@ function Userdata() {
       });
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = (_id) => {
     const confirm = window.confirm(
       "Are you sure you want to delete this row",
-      id
+      _id
     );
     if (confirm) {
-      fetch(`http://localhost:5000/UserDetails/${id}`, { method: "DELETE" })
+      fetch(`http://localhost:9000/users/allusers/${_id}`, { method: "DELETE" })
         .then((resp) => resp.json())
         .then((resp) => getUsers());
     }
@@ -139,28 +125,28 @@ function Userdata() {
         </div>
 
         <div
-          class="modal fade"
+          className="modal fade"
           id="exampleModal"
-          tabindex="-1"
+          tabIndex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h1 className="modal-title fs-5" id="exampleModalLabel">
                   Change Role
                 </h1>
                 <button
                   type="button"
-                  class="btn-close"
+                  className="btn-close"
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 ></button>
               </div>
-              <div class="modal-body">
+              <div className="modal-body">
                 <select
-                  class="form-select form-select-lg mb-3"
+                  className="form-select form-select-lg mb-3"
                   aria-label=".form-select-lg example"
                   value={role}
                   onChange={(e) => {
@@ -171,17 +157,17 @@ function Userdata() {
                   <option value="User">User</option>
                 </select>
               </div>
-              <div class="modal-footer">
+              <div className="modal-footer">
                 <button
                   type="button"
-                  class="btn btn-secondary"
+                  className="btn btn-secondary"
                   data-bs-dismiss="modal"
                 >
                   Close
                 </button>
                 <button
                   type="button"
-                  class="btn btn-primary"
+                  className="btn btn-primary"
                   data-bs-dismiss="modal"
                   onClick={() => roleChangeHandler()}
                 >

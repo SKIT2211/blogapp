@@ -27,7 +27,7 @@ function Navbar() {
 
     const logoutHandler = () => {
         localStorage.removeItem("Loggedinuser")
-        navigate("/Login")
+        navigate("/login")
         window.location.reload();
     }
 
@@ -124,7 +124,7 @@ function Navbar() {
                                     </ul>
                                 </div>
 
-                                    : <div><Button variant="outlined"><Link to="/Login" className=" btn-outline-info"> Login</Link></Button></div>}
+                                    : <div><Button variant="outlined"><Link to="/login" className=" btn-outline-info"> Login</Link></Button></div>}
                             </div>
                         </div>
                     </div>

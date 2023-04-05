@@ -6,13 +6,22 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import Button from "@mui/material/Button";
+import { useNavigate } from 'react-router-dom';
 
 
 const BlogDetails = () => {
         
     const params = useParams()
+    const handleCloseHome = () =>{
+      navigate('/')
+    }
+    const handleCloseAllBlog = () =>{
+      navigate('/blogpart')
+    }
 
     const [post , setPost] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
       fetch(`http://localhost:5000/Blogs/${params.id}`)
@@ -24,6 +33,18 @@ const BlogDetails = () => {
 const card = (
   <React.Fragment>
     <CardContent sx={{ textAlign: "center", margin:"10px"}}>
+    <Button sx={{ marginRight:"900px"}}
+                color="info"
+                onClick={() => handleCloseAllBlog()}
+              >
+               <img src='https://img.icons8.com/office/1x/u-turn-to-left.png'></img>  All Blogs
+              </Button>
+    <Button sx={{ marginLeft:"900px"}}
+                color="primary"
+                onClick={() => handleCloseHome()}
+              >
+               <img src='https://img.icons8.com/office/1x/close-window--v1.png' alt='close' ></img>
+              </Button>
       <Typography variant="h3" sx={{ mb: 1.5  }} component="div">
       {post.title}
       </Typography>
@@ -44,7 +65,7 @@ const card = (
     <>
     <Wrapper>
     <div className="theme">
-    <Box  sx={{ maxWidth: 1000 , height:"100vh" , margin: "0 auto"}}>
+    <Box  sx={{ maxWidth: 1100 , height:"100vh" , margin: "0 auto"}}>
       <Card variant="outlined">{card}</Card>
     </Box>
     </div>
