@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import BlogDialog from "./BlogDialog";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/material";
-let user = JSON.parse(localStorage.getItem("Loggedinuser"));
 
 function Blogpart() {
-  const initialValue = { title: "", description: "", author: "", category: "", userId: user._id};
+  let user = JSON.parse(localStorage.getItem("Loggedinuser"));
+
+  const initialValue = { title: "", description: "", author: "", category: "", userId: user?._id };
   const [formData, setFormData] = useState(initialValue);
   const [gridApi, setGridApi] = useState(null);
   const [open, setOpen] = React.useState(false);
@@ -21,21 +22,23 @@ function Blogpart() {
     floatingFilter: true,
     resizable: true
   };
-  
+
   const TitleViewer = (pdata) => {
+
     if (user) {
       return (
         <>
-          <Link to={`/blogs/${pdata.data.id}`} >
+          <Link to={`http://localhost:3000/blogs/${pdata?.data?._id}`} >
             {pdata.value}
           </Link>
         </>
       );
+
     }
-    else{
+    else {
       return <Link to={`/login`} >
-      {pdata.value}
-    </Link>
+        {pdata.value}
+      </Link>
     }
   };
 
@@ -94,7 +97,7 @@ function Blogpart() {
     getUsers();
   }, []);
   const getUsers = () => {
-    fetch("http://localhost:5000/Blogs")
+    fetch("http://localhost:9000/blogs/allblogs")
       .then((result) => result.json())
       .then((rowData) => setRowData(rowData));
   };
@@ -110,17 +113,19 @@ function Blogpart() {
     handleClickOpen();
   };
 
-  const handleDelete = (id) => {const confirm= window.confirm("Are you sure you want to delete this row",id)
-  if(confirm){
-    fetch(`http://localhost:5000/Blogs/${id}`, { method: "DELETE" })
-      .then((resp) => resp.json())
-      .then((resp) => getUsers());
-  }};
+  const handleDelete = (_id) => {
+    const confirm = window.confirm("Are you sure you want to delete this row", _id)
+    if (confirm) {
+      fetch(`http://localhost:9000/blogs/allblogs/${_id}`, { method: "DELETE" })
+        .then((resp) => resp.json())
+        .then((resp) => getUsers());
+    }
+  };
 
-  
+
   const handleFormSubmit = () => {
-    if (formData.id) {
-      fetch(`http://localhost:5000/Blogs/${formData.id}`, {
+    if (formData._id) {
+      fetch(`http://localhost:9000/blogs/allblogs/${formData._id}`, {
         method: "PUT",
         body: JSON.stringify(formData),
         headers: {
@@ -133,7 +138,7 @@ function Blogpart() {
           getUsers();
         });
     } else {
-      fetch("http://localhost:5000/Blogs", {
+      fetch("http://localhost:9000/blogs/addblog", {
         method: "POST",
         body: JSON.stringify(formData),
         headers: {
@@ -150,47 +155,47 @@ function Blogpart() {
 
   return (
     <>
-    <Wrapper>
-      <div className="all-background">
-      <div style={{ margin: "10px" }}>
-        <Box align="right">
-          {user?.role === "Admin" ? (
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleClickOpen}
-            >
-              Add Blog
-            </Button>
-          ) : (
-            <div></div>
-          )}
-        </Box>
-        <BlogDialog
-          open={open}
-          handleClose={handleClose}
-          data={formData}
-          onChange={onChange}
-          handleFormSubmit={handleFormSubmit}
-        />
-      </div>
-      
-        <div
-          className="ag-theme-alpine"
-          style={{ width: 1300, height: 500, margin: "0 auto" }}
-        >
-          <AgGridReact
-            rowData={rowData}
-            columnDefs={columnDefs}
-            animateRows={true}
-            defaultColDef={defaultColDef}
-            onGridReady={onGridReady}
-            pagination={true}
-            paginationAutoPageSize={true}
+      <Wrapper>
+        <div className="all-background">
+          <div style={{ margin: "10px" }}>
+            <Box align="right">
+              {user?.role === "Admin" ? (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleClickOpen}
+                >
+                  Add Blog
+                </Button>
+              ) : (
+                <div></div>
+              )}
+            </Box>
+            <BlogDialog
+              open={open}
+              handleClose={handleClose}
+              data={formData}
+              onChange={onChange}
+              handleFormSubmit={handleFormSubmit}
+            />
+          </div>
+
+          <div
+            className="ag-theme-alpine"
+            style={{ width: 1300, height: 500, margin: "0 auto" }}
           >
-            {" "}
-          </AgGridReact>
-        </div>
+            <AgGridReact
+              rowData={rowData}
+              columnDefs={columnDefs}
+              animateRows={true}
+              defaultColDef={defaultColDef}
+              onGridReady={onGridReady}
+              pagination={true}
+              paginationAutoPageSize={true}
+            >
+              {" "}
+            </AgGridReact>
+          </div>
         </div>
       </Wrapper>
     </>

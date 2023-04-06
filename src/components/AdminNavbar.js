@@ -7,11 +7,11 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Avatar } from '@mui/material';
-let user = JSON.parse(localStorage.getItem("Loggedinuser"))
 
 
 
 function AdminNavbar() {
+    let user = JSON.parse(localStorage.getItem("Loggedinuser"))
 
     const [open, setOpen] = React.useState(false);
 
@@ -28,7 +28,6 @@ function AdminNavbar() {
     const logoutHandler = () => {
         localStorage.removeItem("Loggedinuser")
         navigate("/Login")
-        window.location.reload();
     }
 
 
@@ -99,7 +98,7 @@ function AdminNavbar() {
                                                 onClose={handleClose}
                                                 aria-labelledby="alert-dialog-title"
                                                 aria-describedby="alert-dialog-description"
-                                                
+
                                             >
                                                 <DialogTitle id="alert-dialog-title">
                                                     My Profile

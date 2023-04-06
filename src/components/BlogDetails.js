@@ -24,7 +24,7 @@ const BlogDetails = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-      fetch(`http://localhost:5000/Blogs/${params.id}`)
+      fetch(`http://localhost:9000/blogs/allblogs/${params?.id}`)
       .then(response => response.json())
       .then(json =>setPost(json))
       
@@ -37,13 +37,13 @@ const card = (
                 color="info"
                 onClick={() => handleCloseAllBlog()}
               >
-               <img src='https://img.icons8.com/office/1x/u-turn-to-left.png'></img>  All Blogs
+               <img src='https://img.icons8.com/office/1x/u-turn-to-left.png' width={"25px"}></img>  All Blogs
               </Button>
     <Button sx={{ marginLeft:"900px"}}
                 color="primary"
                 onClick={() => handleCloseHome()}
               >
-               <img src='https://img.icons8.com/office/1x/close-window--v1.png' alt='close' ></img>
+               <img src='https://img.icons8.com/office/1x/close-window--v1.png' alt='close' width={"25px"}></img>
               </Button>
       <Typography variant="h3" sx={{ mb: 1.5  }} component="div">
       {post.title}

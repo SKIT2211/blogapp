@@ -1,35 +1,35 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 
-let user = JSON.parse(localStorage.getItem("Loggedinuser"));
 
- function Myblogs() {
-   const userIdBlogViewer = async () => {
+function Myblogs() {
+  let user = JSON.parse(localStorage.getItem("Loggedinuser"));
+  const userIdBlogViewer = async (_id) => {
 
-        let result = await fetch(`http://localhost:5000/Blogs/?userId=${user?.id}`)
-        let userData = await result.json()
+    let result = await fetch(`http://localhost:9000/blogs/myblogs/${user._id}`)
+    let userData = await result.json()
 
-        setRowData(userData)
+    setRowData(userData)
   };
 
   const TitleViewer = (pdata) => {
     if (user) {
       return (
         <>
-          <Link to={`/blogs/${pdata.data.id}`} >
+          <Link to={`http://localhost:3000/blogs/${pdata?.data?._id}`} >
             {pdata.value}
           </Link>
         </>
       );
     }
-    else{
-      return <Link to={`/Login`} >
-      {pdata.value}
-    </Link>
+    else {
+      return <Link to={`/login`} >
+        {pdata.value}
+      </Link>
     }
   };
 
@@ -45,8 +45,8 @@ let user = JSON.parse(localStorage.getItem("Loggedinuser"));
   const [gridApi, setGridApi] = useState(null);
   const [rowData, setRowData] = useState();
   const columnDefs = [
-    { headerName: "ID", field: "id" },
-    { headerName: "Title", field: "title",cellRenderer: TitleViewer  },
+    { headerName: "ID", field: "_id" },
+    { headerName: "Title", field: "title", cellRenderer: TitleViewer },
     { headerName: "Description", field: "description" },
     { headerName: "Author", field: "author" },
     { headerName: "Category", field: "category" },
