@@ -7,6 +7,8 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Navbar() {
     let user = JSON.parse(localStorage.getItem("Loggedinuser"));
@@ -25,6 +27,7 @@ function Navbar() {
 
     const logoutHandler = () => {
         localStorage.removeItem("Loggedinuser");
+        toast("Logout Successfully.!!")
         navigate("/login");
     };
 
@@ -183,6 +186,7 @@ function Navbar() {
                     </div>
                 </div>
             </nav>
+            <ToastContainer />
         </>
     );
 }

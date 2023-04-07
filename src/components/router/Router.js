@@ -10,9 +10,9 @@ import BlogDetails from '../BlogDetails';
 import Myblogs from '../Myblogs';
 import Userdata from '../pages/Userdata';
 import Protected from '../Protected';
+import ProtectedBlog from '../ProtectedBlog';
 
 function Router() {
-  let user = JSON.parse(localStorage.getItem("Loggedinuser"))
   return (
     <>
       <BrowserRouter>
@@ -24,13 +24,13 @@ function Router() {
           <Route path='/aboutus' element={<Aboutus />} />
 
           <Route path='/blogpart' element={<Blogpart />} />
-          <Route path='/blogs/:id' element={user ? <BlogDetails /> : <Login />} />
+          <Route path='/blogs/:id' element={<ProtectedBlog> <BlogDetails /> </ProtectedBlog> } />
 
           <Route path='/myblogs' element={<Myblogs />} />
 
 
           <Route path='/Userdetails' element={<Protected><Userdata /></Protected>} />
-          <Route path='/login' element={user ? <Home /> : <Login />} />
+          <Route path='/login' element={ <Login />} />
           <Route path='/signup' element={<Signup />} />
         </Routes>
       </BrowserRouter>

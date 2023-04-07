@@ -24,27 +24,18 @@ function Blogpart() {
   };
 
   const TitleViewer = (pdata) => {
-
-    if (user) {
       return (
         <>
           <Link to={`http://localhost:3000/blogs/${pdata?.data?._id}`} >
             {pdata.value}
           </Link>
         </>
-      );
-
-    }
-    else {
-      return <Link to={`/login`} >
-        {pdata.value}
-      </Link>
-    }
+      )
   };
 
   const [rowData, setRowData] = useState();
   const columnDefs = [
-    { headerName: "ID", field: "_id" },
+    // { headerName: "ID", field: "_id" },
     { headerName: "Title", field: "title", cellRenderer: TitleViewer },
     { headerName: "Description", field: "description" },
     { headerName: "Author", field: "author" },

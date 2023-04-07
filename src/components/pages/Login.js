@@ -2,7 +2,7 @@ import React from 'react'
 import styled from "styled-components";
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-// import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 function Login() {
 
@@ -12,7 +12,6 @@ function Login() {
     })
     const [errors, setError] = useState({})
     const [isSubmit, setIsSubmit] = useState(false);
-    const [isLogin, setIsLogin] = useState(false);
     const navigate = useNavigate();
 
 
@@ -53,6 +52,7 @@ function Login() {
         // if (userData.length> 0){
         //     let loginUser = userData[0]
             localStorage.setItem("Loggedinuser", JSON.stringify(userData));
+            toast("Sign in Successfully..!")
             navigate("/blogpart")
     }
 
@@ -108,7 +108,7 @@ function Login() {
                                 <div className="card bg-glass">
                                     <div className="card-body px-4 py-5 px-md-5">
                                         <form onSubmit={handleSubmit}>
-                                             {Object.keys(errors).length === 0 && isSubmit && isLogin ? (<div className="alert alert-success" role="alert">Successfully login!!</div>) : (<div className="alert alert-info" role="alert">Please enter required details to Sign in !!</div>)}
+                                             {Object.keys(errors).length === 0 && isSubmit  ? (<div className="alert alert-success" role="alert">Successfully login!!</div>) : (<div className="alert alert-info" role="alert">Please enter required details to Sign in !!</div>)}
 
                                             <div className="form-outline mb-4">
                                                 <label className="form-label" htmlFor="form3Example3">Email address </label>

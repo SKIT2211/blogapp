@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import styled from "styled-components";
 import { Link, useNavigate } from 'react-router-dom';
+import {  toast } from 'react-toastify';
+
 
 function Signup() {
 
@@ -12,7 +14,6 @@ function Signup() {
     })
     const [errors, setError] = useState({})
     const [isSubmit, setIsSubmit] = useState(false);
-    // const [isAlreadyUser, setIsAlreadyUser] = useState(false);
     const navigate = useNavigate();
 
 
@@ -30,16 +31,6 @@ function Signup() {
         setError(Validation(values));
         setIsSubmit(true)
 
-        let result = await fetch("http://localhost:9000/users/allusers")
-        let userData = await result.json()
-
-        let user = userData.filter((user1) => user1.email === values.email)
-
-        if (user.length > 0) {
-            setIsSubmit(false)
-            return null
-        }
-
             let resultt = await fetch("http://localhost:9000/users/register", {
                 method: 'POST',
                 headers: {
@@ -48,9 +39,15 @@ function Signup() {
                 },
                 body: JSON.stringify(values)
             });
+
             resultt = await resultt.json();
-            // localStorage.setItem("Userdetails", JSON.stringify(resultt));
-            navigate("/login")
+
+            if(resultt?.data){
+                toast.success(resultt.msg)
+                navigate("/login")
+            }else{
+                toast.error(resultt.msg)
+            }
     }
 
     useEffect(() => {
@@ -125,9 +122,6 @@ function Signup() {
                                 <div className="card bg-glass">
                                     <div className="card-body px-4 py-5 px-md-5">
                                         <form onSubmit={handleSubmit}>
-
-                                        {Object.keys(errors).length === 0 && isSubmit  ? (<div className="alert alert-success" role="alert">Successfully Signup!!</div>) : (<div className="alert alert-info" role="alert">Please enter required details to Sign Up !! 
-                                        <br />&&  Make sure you're not Alreday User!!</div>)}
 
                                             <div className="row">
                                                 {/* <div className="col-md-6 mb-4">

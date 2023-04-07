@@ -45,7 +45,7 @@ function Myblogs() {
   const [gridApi, setGridApi] = useState(null);
   const [rowData, setRowData] = useState();
   const columnDefs = [
-    { headerName: "ID", field: "_id" },
+    // { headerName: "ID", field: "_id" },
     { headerName: "Title", field: "title", cellRenderer: TitleViewer },
     { headerName: "Description", field: "description" },
     { headerName: "Author", field: "author" },
