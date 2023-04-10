@@ -11,7 +11,7 @@ import { Box } from "@mui/material";
 function Blogpart() {
   let user = JSON.parse(localStorage.getItem("Loggedinuser"));
 
-  const initialValue = { title: "", description: "", author: "", category: "", userId: user?._id };
+  const initialValue = { title: "", description: "", author: "", category: "", picture:"", userId: user?._id};
   const [formData, setFormData] = useState(initialValue);
   const [gridApi, setGridApi] = useState(null);
   const [open, setOpen] = React.useState(false);
@@ -40,6 +40,7 @@ function Blogpart() {
     { headerName: "Description", field: "description" },
     { headerName: "Author", field: "author" },
     { headerName: "Category", field: "category" },
+    // { headerName: "Picture", field: "picture" },
 
     {
       headerName: "Actions",
@@ -94,8 +95,8 @@ function Blogpart() {
   };
 
   const onChange = (e) => {
-    const { value, id } = e.target;
-
+    const { value, id  } = e.target;
+    console.log("sa", e.target.id);
     setFormData({ ...formData, [id]: value });
   };
 
@@ -105,7 +106,7 @@ function Blogpart() {
   };
 
   const handleDelete = (_id) => {
-    const confirm = window.confirm("Are you sure you want to delete this row", _id)
+    const confirm = window.confirm(`Are you sure you want to delete this blog with id : ${_id}`)
     if (confirm) {
       fetch(`http://localhost:9000/blogs/allblogs/${_id}`, { method: "DELETE" })
         .then((resp) => resp.json())
@@ -197,7 +198,7 @@ const Wrapper = styled.section`
    {
     .ag-theme-alpine {
       --ag-foreground-color: rgb(126, 46, 132);
-      --ag-background-color: rgb(249, 245, 227);
+      --ag-background-color: rgb(35, 25, 65);
       --ag-header-foreground-color: rgb(204, 245, 172);
       --ag-header-background-color: #44006b;
       --ag-odd-row-background-color: rgb(0, 0, 0, 0.03);

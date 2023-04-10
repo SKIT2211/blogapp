@@ -93,7 +93,7 @@ const Wrapper = styled.section`
    {
     .ag-theme-alpine {
       --ag-foreground-color: rgb(126, 46, 132);
-      --ag-background-color: rgb(249, 245, 227);
+      --ag-background-color: rgb(35, 25, 65);
       --ag-header-foreground-color: rgb(204, 245, 172);
       --ag-header-background-color: #44006b;
       --ag-odd-row-background-color: rgb(0, 0, 0, 0.03);

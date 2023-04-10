@@ -52,7 +52,7 @@ function Navbar() {
                             </button>
 
                             <div
-                                style={{ width: "180px" }}
+                                style={{ width: "180px", backgroundColor: "rgb(135, 205, 225)" }}
                                 className="offcanvas offcanvas-start"
                                 tabIndex="-1"
                                 id="offcanvasExample"
@@ -127,7 +127,7 @@ function Navbar() {
                                             data-bs-toggle="dropdown"
                                             aria-expanded="false"
                                         >
-                                            <Avatar alt={user.name} src="..." />
+                                            <Avatar alt={user.name} src="..." style={{ marginLeft: "200px", backgroundColor : "skyblue"}} />
                                         </div>
                                         <ul
                                             className="dropdown-menu dropdown-menu-end"
@@ -142,13 +142,15 @@ function Navbar() {
                                                     onClose={handleClose}
                                                     aria-labelledby="alert-dialog-title"
                                                     aria-describedby="alert-dialog-description"
-                                                >
+                                                    
+                                                ><div style={{backgroundColor: "rgb(135, 205, 225)"}}>
                                                     <DialogTitle id="alert-dialog-title">
                                                         My Profile
                                                         <Avatar
                                                             alt={user.name}
                                                             src="..."
-                                                            style={{ marginLeft: "200px" }}
+                                                            style={{ marginLeft: "200px"}}
+                                                            sx={{ bgcolor: "gray" }}
                                                         />
                                                     </DialogTitle>
                                                     <DialogContent>
@@ -161,7 +163,7 @@ function Navbar() {
                                                     </DialogContent>
                                                     <DialogActions>
                                                         <Button onClick={handleClose}>Close</Button>
-                                                    </DialogActions>
+                                                    </DialogActions></div>
                                                 </Dialog>
                                             </li>
                                             <li>

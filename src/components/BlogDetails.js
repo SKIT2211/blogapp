@@ -11,7 +11,6 @@ import { useNavigate } from 'react-router-dom';
 
 
 const BlogDetails = () => {
-        
     const params = useParams()
     const handleCloseHome = () =>{
       navigate('/')
@@ -21,6 +20,7 @@ const BlogDetails = () => {
     }
 
     const [post , setPost] = useState([]);
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -32,7 +32,7 @@ const BlogDetails = () => {
 
 const card = (
   <React.Fragment>
-    <CardContent sx={{ textAlign: "center", margin:"10px"}}>
+    <CardContent sx={{ textAlign: "center", margin:"10px", backgroundColor: "rgb(135, 205, 225)"}}>
     <Button sx={{ marginRight:"900px"}}
                 color="info"
                 onClick={() => handleCloseAllBlog()}
@@ -47,6 +47,9 @@ const card = (
               </Button>
       <Typography variant="h3" sx={{ mb: 1.5  }} component="div">
       {post.title}
+      </Typography>
+      <Typography sx={{ mb: 1.5  }} ><img src={`/uploads/${post.picture}`} width={'200px'}/>
+      {post.picture}  
       </Typography>
       <Typography sx={{ fontSize: 20 ,mb: 1.5 }} color="text.secondary">
       {post.description}
