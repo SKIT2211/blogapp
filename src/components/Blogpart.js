@@ -40,7 +40,7 @@ function Blogpart() {
     { headerName: "Description", field: "description" },
     { headerName: "Author", field: "author" },
     { headerName: "Category", field: "category" },
-    // { headerName: "Picture", field: "picture" },
+    { headerName: "Picture", field: "picture" },
 
     {
       headerName: "Actions",
@@ -95,9 +95,9 @@ function Blogpart() {
   };
 
   const onChange = (e) => {
-    const { value, id  } = e.target;
-    console.log("sa", e.target.id);
+    const { value, id} = e.target;
     setFormData({ ...formData, [id]: value });
+    console.log("ew", formData);
   };
 
   const handleUpdate = (oldData) => {
@@ -116,13 +116,18 @@ function Blogpart() {
 
 
   const handleFormSubmit = () => {
+    const data = new FormData() 
+    data.append('file', formData.picture)
+    data.append('title', formData.title)
+    data.append('description', formData.description)
+    data.append('author', formData.author)
+    data.append('category', formData.category)
+    data.append('userId', formData.userId)
+    
     if (formData._id) {
       fetch(`http://localhost:9000/blogs/allblogs/${formData._id}`, {
         method: "PUT",
-        body: JSON.stringify(formData),
-        headers: {
-          "content-type": "application/json",
-        },
+        body: data,
       })
         .then((resp) => resp.json())
         .then((resp) => {
@@ -130,12 +135,10 @@ function Blogpart() {
           getUsers();
         });
     } else {
+      console.log(formData)
       fetch("http://localhost:9000/blogs/addblog", {
         method: "POST",
-        body: JSON.stringify(formData),
-        headers: {
-          "content-type": "application/json",
-        },
+        body: data,
       })
         .then((resp) => resp.json())
         .then((resp) => {
@@ -167,6 +170,7 @@ function Blogpart() {
               open={open}
               handleClose={handleClose}
               data={formData}
+              setFormData={setFormData}
               onChange={onChange}
               handleFormSubmit={handleFormSubmit}
             />

@@ -5,7 +5,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import { TextField } from '@mui/material';
 
-export default function BlogDialog({ open, handleClose, data, onChange, handleFormSubmit }) {
+export default function BlogDialog({ open, handleClose, data, setFormData, onChange, handleFormSubmit }) {
 
   const { id, title, description, author, category, picture } = data
   return (
@@ -25,7 +25,7 @@ export default function BlogDialog({ open, handleClose, data, onChange, handleFo
           <TextField id='description' value={description} onChange={e => onChange(e)} placeholder='Enter description here' label='Description' variant='outlined' margin='dense' fullWidth />
           <TextField id='author' value={author} onChange={e => onChange(e)} placeholder='Enter your name' label='Author' variant='outlined' margin='dense' fullWidth />
           <TextField id='category' value={category} onChange={e => onChange(e)} placeholder='Enter category here' label='Category' variant='outlined' margin='dense' fullWidth />
-          <TextField id='picture' name='picture' value={picture} onChange={e => onChange(e)} type="file" variant='outlined' margin='dense' />
+          <TextField  onChange={e => setFormData({...data, picture:e.target.files[0]})} type="file" variant='outlined' margin='dense' />
 
         </form>
         <DialogActions>
