@@ -33,13 +33,13 @@ function Navbar() {
 
     return (
         <>
-            <nav className="navbar navbar-expand-lg navbar-light bg-light border border-info rounded">
+            <nav className="navbar navbar-expand-lg navbar-light  border border-info rounded" style={{backgroundColor: "#e3f2fd"}}>
                 <div className="container-fluid">
                     {user?.role === "Admin" && (
                         <>
                             <button
-                                style={{ marginRight: "5px" }}
-                                className="btn btn-info "
+                                style={{ marginRight: "20px" ,backgroundColor: "rgb(153, 31, 205)"}}
+                                className="btn"
                                 data-bs-toggle="offcanvas"
                                 data-bs-target="#offcanvasExample"
                                 aria-controls="offcanvasExample"
@@ -52,14 +52,14 @@ function Navbar() {
                             </button>
 
                             <div
-                                style={{ width: "180px", backgroundColor: "rgb(135, 205, 225)" }}
+                                style={{ width: "180px", backgroundColor: "#e3f2fd" }}
                                 className="offcanvas offcanvas-start"
                                 tabIndex="-1"
                                 id="offcanvasExample"
                                 aria-labelledby="offcanvasExampleLabel"
                             >
-                                <div className="offcanvas-header">
-                                    <h5 className="offcanvas-title" id="offcanvasExampleLabel">
+                                <div className="offcanvas-header" style={{marginTop:"15px"}}>
+                                    <h5 className="offcanvas-title" id="offcanvasExampleLabel" >
                                         AdminAccess
                                     </h5>
                                     <button
@@ -69,7 +69,7 @@ function Navbar() {
                                         aria-label="Close"
                                     ></button>
                                 </div>
-                                <div className="offcanvas-body">
+                                <div className="offcanvas-body" style={{marginTop:"20px" ,backgroundColor: "rgb(135, 185, 205)"}}>
                                     <Link to="/home" className="dropdown-item">
                                         Home
                                     </Link>
@@ -92,6 +92,7 @@ function Navbar() {
                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK8AAACHCAMAAABXs/kcAAAAeFBMVEX///9EUEWe1cs8ST1BTULo6eh3fng0QjWkqKT8/PwoOSma08k5Rjrs7ewvPjDx8vHP0c/a3Nq6vbqu29N+hX8iNCSR0MVgaWHGycYeMR8SKRSXm5dvd3D0+vlnb2fG5uBMV03V7OeLkYtXYVjh8e6tsa0EIgi74dqnwdgmAAAECUlEQVR4nO2Z2XabMBBAAQlkdrOYxSwG2yn//4dlkVhFmtMixzmd+5CTmABXwzAjyZIEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP8Duv7JsddpfBE1q1DucQ/pSYnK03spqw8HY4ucecc+DISRcX8nYT0kcseVc8y79ocu/sut9rGRPEhxApwNQ0H567V2UY3B1+EEURvGgvHrtXb5iq/8eq1dwFcszJf4uu2dz6o9K148X71o2Slwutsi1HbyxaVmpC1I+7D3fZ+3JjBNJWjqjbLuZ/mjeuR3X6gy85UxLWyIyCw11r5FoJitrdL/rFe2D4sgjDEiVpUJbDCj74xLafN8b1HnyoiCYrqKV17wdD6Rk5f6yiRWt77N3LYLsjIKexZanI+IsJbI9ZWtyl37NpGywjSpsGfg9QWMj5f6ys595Vuba91WuOkv4VYb3VZYfamvTJKFb6FwfBXz2V1CI5zzcSzmpZv5YueaWmNGhAvfepMNY4C9SRejKdKOmHdu8iWlr3qZzO54dee+PNuuSLRXuLMxIjkP82r8KxbrS7T+AXrM1/BnvgUvG7oA15Jb0tpgPbpFipezUvFLSEKM/S2mbe18ofEJZ768t40mBEsH/BjeMP1BR2wISQjmi+70Ax0P98PlzPe25xuM47NYBUvYDEpISWO+1on50geK46/5JtSXsCWrzQaQCfEl6/jKfxffccXqsg+E+Lo03f4yfwPJW4eT5QM57d70H9BDi18fnHl9eO753iSVPY9qSIix24nxlU6s3H9af7ntoq2/T8llBQz1wmrM6tmxvu6pImGXcqrMWPY3bdHf1pMz5tsNeDwnlbVHOna4Y31jB2PidMIhr/2v5w9PboCjWzdyZxoxms+Cj/TNnCHn3K4gLCevQ/au52f8APcTSt/Znn+0b0wD0QU42d5vOf/t9kt4b1w0rIn0nP+EDvRlTRP1PTNxVhNYur6gM5l+5sKpwFHDrhbzhA+NLw1dNfT8BFvzO7H123nY7zPaG+vBxrdP3gG75KTEob620QpjY2zCGibb9bEeOn2wW/siapc/ijlKt78959fLrE2Ij60P5/h6nXd4Lys3+w+Sm1lXJ+yeQbs2DuqiDqKoXcubURTciuX1vDtOiYUQuThCfCVX9ezlB/3+jructdp0w0epez+9qG9N09TFyrY/38vCXMsSj7YcQf3tcNyUxlfUEvlgkk92EN+Qcb6T8r/DeTPUcly/fbfKn9H9ab5D7n/+/29Gz2a7fkTcnt9R+OnULaz3D69UThM9fBG90X4A49pExtZPKA4amzVZDvfr3XfjTL8PJaWgzdSj8VPHctL4hzTiFu90P3k/4E0DAAAAAAAAAAAAAAAAAAAAAAAAAOA9+A20dzlVUgvK0wAAAABJRU5ErkJggg=="
                             height="70"
                             alt="Blog-logo"
+                            style={{borderRadius:"20px"}}
                         ></img>
                     </Link>
                     <button
@@ -127,7 +128,7 @@ function Navbar() {
                                             data-bs-toggle="dropdown"
                                             aria-expanded="false"
                                         >
-                                            <Avatar alt={user.name} src="..." style={{ marginLeft: "200px", backgroundColor : "skyblue"}} />
+                                            <Avatar alt={user.name} src="..." style={{ marginLeft: "200px", backgroundColor : "rgb(153, 31, 205)"}} />
                                         </div>
                                         <ul
                                             className="dropdown-menu dropdown-menu-end"
@@ -143,7 +144,7 @@ function Navbar() {
                                                     aria-labelledby="alert-dialog-title"
                                                     aria-describedby="alert-dialog-description"
                                                     
-                                                ><div style={{backgroundColor: "rgb(135, 205, 225)"}}>
+                                                ><div style={{backgroundColor: "#e3f2fd"}}>
                                                     <DialogTitle id="alert-dialog-title">
                                                         My Profile
                                                         <Avatar

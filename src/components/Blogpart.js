@@ -13,7 +13,7 @@ function Blogpart() {
 
   const initialValue = { title: "", description: "", author: "", category: "", picture:"", userId: user?._id};
   const [formData, setFormData] = useState(initialValue);
-  const [gridApi, setGridApi] = useState(null);
+  // const [gridApi, setGridApi] = useState(null);
   const [open, setOpen] = React.useState(false);
   const defaultColDef = {
     sortable: true,
@@ -36,15 +36,16 @@ function Blogpart() {
   const [rowData, setRowData] = useState();
   const columnDefs = [
     // { headerName: "ID", field: "_id" },
-    { headerName: "Title", field: "title", cellRenderer: TitleViewer },
-    { headerName: "Description", field: "description" },
-    { headerName: "Author", field: "author" },
-    { headerName: "Category", field: "category" },
-    { headerName: "Picture", field: "picture" },
+    { headerName: "Title", field: "title",minWidth:300, cellRenderer: TitleViewer },
+    { headerName: "Description", field: "description" ,minWidth:300},
+    { headerName: "Author", field: "author",minWidth:40 },
+    { headerName: "Category", field: "category",minWidth:40 },
+    // { headerName: "Picture", field: "picture",minWidth:200 },
 
     {
       headerName: "Actions",
       field: "_id",
+      minWidth:250,
       cellRendererFramework: (params) => {
         if (user?.role === "Admin") {
           return (
@@ -81,9 +82,9 @@ function Blogpart() {
     setFormData(initialValue);
   };
 
-  const onGridReady = (params) => {
-    setGridApi(params);
-  };
+  // const onGridReady = (params) => {
+  //   setGridApi(params);
+  // };
 
   useEffect(() => {
     getUsers();
@@ -152,12 +153,13 @@ function Blogpart() {
     <>
       <Wrapper>
         <div className="all-background">
-          <div style={{ margin: "10px" }}>
+          <div >
             <Box align="right">
               {user?.role === "Admin" ? (
                 <Button
                   variant="contained"
                   color="primary"
+                  style={{ margin: "10px" }}
                   onClick={handleClickOpen}
                 >
                   Add Blog
@@ -185,7 +187,7 @@ function Blogpart() {
               columnDefs={columnDefs}
               animateRows={true}
               defaultColDef={defaultColDef}
-              onGridReady={onGridReady}
+              // onGridReady={onGridReady}
               pagination={true}
               paginationAutoPageSize={true}
             >
