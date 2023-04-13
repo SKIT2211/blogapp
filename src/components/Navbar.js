@@ -12,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function Navbar() {
     let user = JSON.parse(localStorage.getItem("Loggedinuser"));
-
+    user = user?.data ;
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {

@@ -3,6 +3,7 @@ import Login from './pages/Login';
 
 function ProtectedBlog() {
   let user = JSON.parse(localStorage.getItem("Loggedinuser"));
+  user = user?.data ;
 
   return (
     <>

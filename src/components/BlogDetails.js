@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import Button from "@mui/material/Button";
 import { useNavigate } from 'react-router-dom';
 import { CardMedia } from '@mui/material';
+import axios from 'axios';
 
 
 const BlogDetails = () => {
@@ -25,9 +26,8 @@ const BlogDetails = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:9000/blogs/allblogs/${params?.id}`)
-      .then(response => response.json())
-      .then(json => setPost(json))
+    axios.get(`http://localhost:9000/blogs/allblogs/${params?.id}`)
+      .then(response => setPost(response))
 
   }, [params]);
 

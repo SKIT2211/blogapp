@@ -7,9 +7,11 @@ import "ag-grid-community/styles/ag-theme-alpine.css";
 import BlogDialog from "./BlogDialog";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/material";
+import axios from "axios";
 
 function Blogpart() {
   let user = JSON.parse(localStorage.getItem("Loggedinuser"));
+  user = user?.data ;
 
   const initialValue = { title: "", description: "", author: "", category: "", picture:"", userId: user?._id};
   const [formData, setFormData] = useState(initialValue);
@@ -90,15 +92,13 @@ function Blogpart() {
     getUsers();
   }, []);
   const getUsers = () => {
-    fetch("http://localhost:9000/blogs/allblogs")
-      .then((result) => result.json())
-      .then((rowData) => setRowData(rowData));
+    axios.get("http://localhost:9000/blogs/allblogs")
+      .then((response) => setRowData(response.data));
   };
 
   const onChange = (e) => {
     const { value, id} = e.target;
     setFormData({ ...formData, [id]: value });
-    console.log("ew", formData);
   };
 
   const handleUpdate = (oldData) => {
@@ -109,8 +109,8 @@ function Blogpart() {
   const handleDelete = (_id) => {
     const confirm = window.confirm(`Are you sure you want to delete this blog with id : ${_id}`)
     if (confirm) {
-      fetch(`http://localhost:9000/blogs/allblogs/${_id}`, { method: "DELETE" })
-        .then((resp) => resp.json())
+      axios.delete(`http://localhost:9000/blogs/allblogs/${_id}`)
+        // .then((resp) => resp.json())
         .then((resp) => getUsers());
     }
   };
@@ -136,7 +136,6 @@ function Blogpart() {
           getUsers();
         });
     } else {
-      console.log(formData)
       fetch("http://localhost:9000/blogs/addblog", {
         method: "POST",
         body: data,

@@ -4,13 +4,14 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import Button from "@mui/material/Button";
+import axios from "axios";
 
 function Userdata() {
 
   const [role, setRole] = useState();
   const [details, setDetails] = useState(null);
 
-  const [gridApi, setGridApi] = useState(null);
+  // const [gridApi, setGridApi] = useState(null);
 
   const defaultColDef = {
     sortable: true,
@@ -52,18 +53,20 @@ function Userdata() {
     },
   ];
 
-  const onGridReady = (params) => {
-    setGridApi(params);
-  };
+  // const onGridReady = (params) => {
+  //   setGridApi(params);
+  // };
 
   useEffect(() => {
     getUsers();
   }, []);
 
   const getUsers = () => {
-    fetch("http://localhost:9000/users/allusers")
-      .then((result) => result.json())
-      .then((rowData) => setRowData(rowData));
+    axios.get("http://localhost:9000/users/allusers")
+    // .then((result) => result.json())
+    .then((response) => {
+      setRowData(response.data)
+    });
       
   };
   const changeRole = (data) => {
@@ -79,15 +82,13 @@ function Userdata() {
       password: details.password,
       role: role,
     };
-    fetch(`http://localhost:9000/users/allusers/${details._id}`, {
-      method: "PUT",
-      body: JSON.stringify(payload),
+    axios.put(`http://localhost:9000/users/allusers/${details._id}`, payload,{
       headers: {
         "content-type": "application/json",
-      },
+      }
     })
-      .then((result) => result.json())
-      .then((resp) => {
+      // .then((result) => result.json())
+      .then((res) => {
         setDetails(null)
        return getUsers()
       });
@@ -99,9 +100,8 @@ function Userdata() {
       _id
     );
     if (confirm) {
-      fetch(`http://localhost:9000/users/allusers/${_id}`, { method: "DELETE" })
-        .then((resp) => resp.json())
-        .then((resp) => getUsers());
+      axios.delete(`http://localhost:9000/users/allusers/${_id}`)
+      .then((resp) => getUsers());
     }
   };
   return (
@@ -116,7 +116,7 @@ function Userdata() {
             columnDefs={columnDefs}
             animateRows={true}
             defaultColDef={defaultColDef}
-            onGridReady={onGridReady}
+            // onGridReady={onGridReady}
             pagination={true}
             paginationAutoPageSize={true}
           >

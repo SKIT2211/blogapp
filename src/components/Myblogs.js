@@ -4,14 +4,16 @@ import { Link } from "react-router-dom";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
+import axios from "axios";
 
 
 function Myblogs() {
   let user = JSON.parse(localStorage.getItem("Loggedinuser"));
+  user = user?.data ;
   const userIdBlogViewer = async (_id) => {
 
-    let result = await fetch(`http://localhost:9000/blogs/myblogs/${user._id}`)
-    let userData = await result.json()
+    let result = await axios.get(`http://localhost:9000/blogs/myblogs/${user._id}`)
+    let userData = result.data
 
     setRowData(userData)
   };
@@ -42,7 +44,6 @@ function Myblogs() {
     resizable: true,
   };
 
-  const [gridApi, setGridApi] = useState(null);
   const [rowData, setRowData] = useState();
   const columnDefs = [
     // { headerName: "ID", field: "_id" },
@@ -52,11 +53,6 @@ function Myblogs() {
     { headerName: "Category", field: "category" },
     // { headerName: "UserId", field: "userId" },
   ];
-
-  const onGridReady = (params) => {
-    setGridApi(params);
-
-  };
 
   useEffect(() => {
     userIdBlogViewer();
@@ -76,7 +72,6 @@ function Myblogs() {
               columnDefs={columnDefs}
               animateRows={true}
               defaultColDef={defaultColDef}
-              onGridReady={onGridReady}
               pagination={true}
               paginationAutoPageSize={true}
             >

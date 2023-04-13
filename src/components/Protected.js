@@ -8,7 +8,7 @@ function Protected() {
   let navigate = useNavigate();
   const [admin, setAdmin] = useState(false)
   let user = JSON.parse(localStorage.getItem("Loggedinuser"))
-
+  user = user?.data ;
 
   useEffect(() => {
     if (user?.role === "Admin") {
@@ -18,7 +18,7 @@ function Protected() {
     }
      
 
-  }, [user?.role]);
+  }, [user?.role, navigate]);
 
   return (
     <>

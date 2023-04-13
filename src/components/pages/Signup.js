@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styled from "styled-components";
 import { Link, useNavigate } from 'react-router-dom';
 import {  toast } from 'react-toastify';
+import axios from 'axios';
 
 
 function Signup() {
@@ -31,16 +32,13 @@ function Signup() {
         setError(Validation(values));
         setIsSubmit(true)
 
-            let resultt = await fetch("http://localhost:9000/users/register", {
-                method: 'POST',
+            let result = await axios.post("http://localhost:9000/users/register", values, {
                 headers: {
                     "Content-Type": "application/json",
                     "Accept": "application/json"
-                },
-                body: JSON.stringify(values)
+                }
             });
-
-            resultt = await resultt.json();
+            const resultt = result.data
 
             if(resultt?.data){
                 toast.success(resultt.msg)

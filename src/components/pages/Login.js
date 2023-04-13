@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
+import axios  from 'axios';
 
 function Login() {
 
@@ -27,33 +28,23 @@ function Login() {
         e.preventDefault();
         setError(Validation(values))
         setIsSubmit(true)
-        // setIsLogin(true)
-        
 
-        let result = await fetch("http://localhost:9000/users/login" ,{
-            method: 'POST',
+        let result = await axios.post("http://localhost:9000/users/login", values, {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json"
-            },
-            body: JSON.stringify(values)
+            }
         });
-        let userData = await result.json()
 
-    //    let user = userData
-    //    .filter(userData => {
-    //         if (userData.email === values.email && userData.password === values.password) {
-    //             return userData
-    //         }
-    //         else {
-    //             return setIsLogin(false)
-    //         }
-    //     })
-        // if (userData.length> 0){
-        //     let loginUser = userData[0]
+        const userData = result?.data
+
+        if (userData?.data) {
+            toast.success(userData.msg)
             localStorage.setItem("Loggedinuser", JSON.stringify(userData));
-            toast("Sign in Successfully..!")
             navigate("/blogpart")
+        } else {
+            toast.error(userData.msg)
+        }
     }
 
     useEffect(() => {
@@ -108,7 +99,7 @@ function Login() {
                                 <div className="card bg-glass">
                                     <div className="card-body px-4 py-5 px-md-5">
                                         <form onSubmit={handleSubmit}>
-                                             {Object.keys(errors).length === 0 && isSubmit  ? (<div className="alert alert-success" role="alert">Successfully login!!</div>) : (<div className="alert alert-info" role="alert">Please enter required details to Sign in !!</div>)}
+                                            {Object.keys(errors).length === 0 && isSubmit ? (<div className="alert alert-success" role="alert">Successfully login!!</div>) : (<div className="alert alert-info" role="alert">Please enter required details to Sign in !!</div>)}
 
                                             <div className="form-outline mb-4">
                                                 <label className="form-label" htmlFor="form3Example3">Email address </label>
