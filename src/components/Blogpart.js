@@ -15,7 +15,6 @@ function Blogpart() {
 
   const initialValue = { title: "", description: "", author: "", category: "", picture:"", userId: user?._id};
   const [formData, setFormData] = useState(initialValue);
-  // const [gridApi, setGridApi] = useState(null);
   const [open, setOpen] = React.useState(false);
   const defaultColDef = {
     sortable: true,
@@ -84,10 +83,6 @@ function Blogpart() {
     setFormData(initialValue);
   };
 
-  // const onGridReady = (params) => {
-  //   setGridApi(params);
-  // };
-
   useEffect(() => {
     getUsers();
   }, []);
@@ -110,7 +105,6 @@ function Blogpart() {
     const confirm = window.confirm(`Are you sure you want to delete this blog with id : ${_id}`)
     if (confirm) {
       axios.delete(`http://localhost:9000/blogs/allblogs/${_id}`)
-        // .then((resp) => resp.json())
         .then((resp) => getUsers());
     }
   };
@@ -126,21 +120,19 @@ function Blogpart() {
     data.append('userId', formData.userId)
     
     if (formData._id) {
-      fetch(`http://localhost:9000/blogs/allblogs/${formData._id}`, {
-        method: "PUT",
-        body: data,
-      })
+      axios.put(`http://localhost:9000/blogs/allblogs/${formData._id}`, data
+      // {
+      //   method: "PUT",
+      //   body: ,
+      // }
+      )
         .then((resp) => resp.json())
         .then((resp) => {
           handleClose();
           getUsers();
         });
     } else {
-      fetch("http://localhost:9000/blogs/addblog", {
-        method: "POST",
-        body: data,
-      })
-        .then((resp) => resp.json())
+      axios.post("http://localhost:9000/blogs/addblog", data)
         .then((resp) => {
           handleClose();
           getUsers();
@@ -186,7 +178,6 @@ function Blogpart() {
               columnDefs={columnDefs}
               animateRows={true}
               defaultColDef={defaultColDef}
-              // onGridReady={onGridReady}
               pagination={true}
               paginationAutoPageSize={true}
             >

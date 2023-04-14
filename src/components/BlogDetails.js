@@ -11,7 +11,6 @@ import { useNavigate } from 'react-router-dom';
 import { CardMedia } from '@mui/material';
 import axios from 'axios';
 
-
 const BlogDetails = () => {
   const params = useParams()
   const handleCloseHome = () => {
@@ -27,7 +26,7 @@ const BlogDetails = () => {
 
   useEffect(() => {
     axios.get(`http://localhost:9000/blogs/allblogs/${params?.id}`)
-      .then(response => setPost(response))
+      .then(response => setPost(response.data))
 
   }, [params]);
 

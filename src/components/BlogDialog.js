@@ -7,7 +7,7 @@ import { TextField } from '@mui/material';
 
 export default function BlogDialog({ open, handleClose, data, setFormData, onChange, handleFormSubmit }) {
 
-  const { id, title, description, author, category, picture } = data
+  const { id, title, description, author, category } = data
   return (
     <div>
 
