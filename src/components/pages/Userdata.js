@@ -5,13 +5,14 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import Button from "@mui/material/Button";
 import axios from "axios";
+import axoisInstance from "../services/axoisInstance";
 
 function Userdata() {
+  let token = JSON.parse(localStorage.getItem("Loggedinuser"));
+  const accessToken = token?.accesstoken
 
   const [role, setRole] = useState();
   const [details, setDetails] = useState(null);
-
-  // const [gridApi, setGridApi] = useState(null);
 
   const defaultColDef = {
     sortable: true,
@@ -52,18 +53,16 @@ function Userdata() {
       ),
     },
   ];
-
-  // const onGridReady = (params) => {
-  //   setGridApi(params);
-  // };
-
   useEffect(() => {
     getUsers();
   }, []);
 
   const getUsers = () => {
-    axios.get("http://localhost:9000/users/allusers")
-    // .then((result) => result.json())
+    axoisInstance.get("http://localhost:9000/users/allusers", {
+      headers:{
+        Authorization: "Bearer " + accessToken
+      }
+    })
     .then((response) => {
       setRowData(response.data)
     });
@@ -87,7 +86,6 @@ function Userdata() {
         "content-type": "application/json",
       }
     })
-      // .then((result) => result.json())
       .then((res) => {
         setDetails(null)
        return getUsers()
@@ -116,7 +114,6 @@ function Userdata() {
             columnDefs={columnDefs}
             animateRows={true}
             defaultColDef={defaultColDef}
-            // onGridReady={onGridReady}
             pagination={true}
             paginationAutoPageSize={true}
           >
