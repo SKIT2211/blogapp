@@ -1,14 +1,14 @@
 import axios from 'axios'
 
 function getLocalAccessToken() {
-    let accessToken = JSON.parse(localStorage.getItem("Loggedinuser"));
-    accessToken = accessToken.accesstoken
+    let accessToken = JSON.parse(localStorage.getItem("AccessToken"));
+    // accessToken = accessToken.accesstoken
     return accessToken;
 }
 
 function getLocalRefreshToken() {
-    let refreshToken = JSON.parse(localStorage.getItem("Loggedinuser"));
-    refreshToken = refreshToken.refreshtoken
+    let refreshToken = JSON.parse(localStorage.getItem("RefreshToken"));
+    // refreshToken = refreshToken.refreshtoken
     return refreshToken;
 }
 
@@ -18,7 +18,6 @@ function refreshToken() {
     });
 }
 
-// axoisInstance.defaults.headers.common['Authorization'] = 'Auth From instance';
 const axoisInstance = axios.create({});
 
 axoisInstance.interceptors.request.use(
@@ -48,9 +47,8 @@ axoisInstance.interceptors.response.use(
 
                 try {
                     const rs = await refreshToken();
-                    console.log("data",rs);
                     const  accessToken  = rs?.data;
-                    localStorage.setItem("accessToken", JSON.stringify(accessToken));
+                    localStorage.setItem("AccessToken", JSON.stringify(accessToken));
                     axoisInstance.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
 
                     return axoisInstance(originalConfig);

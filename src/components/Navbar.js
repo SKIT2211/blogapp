@@ -27,6 +27,8 @@ function Navbar() {
 
     const logoutHandler = () => {
         localStorage.removeItem("Loggedinuser");
+        localStorage.removeItem("AccessToken");
+        localStorage.removeItem("RefreshToken");
         toast("Logout Successfully.!!")
         navigate("/login");
     };

@@ -4,12 +4,11 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import Button from "@mui/material/Button";
-import axios from "axios";
 import axoisInstance from "../services/axoisInstance";
 
 function Userdata() {
-  let token = JSON.parse(localStorage.getItem("Loggedinuser"));
-  const accessToken = token?.accesstoken
+  let accessToken = JSON.parse(localStorage.getItem("AccessToken"));
+  // const accessToken = token?.accesstoken
 
   const [role, setRole] = useState();
   const [details, setDetails] = useState(null);
@@ -23,7 +22,7 @@ function Userdata() {
   };
   const [rowData, setRowData] = useState();
   const columnDefs = [
-    { headerName: "ID", field: "_id" },
+    // { headerName: "ID", field: "_id" },
     { headerName: "Name", field: "name" },
     { headerName: "Email", field: "email" },
     { headerName: "Number", field: "number" },
@@ -81,7 +80,7 @@ function Userdata() {
       password: details.password,
       role: role,
     };
-    axios.put(`http://localhost:9000/users/allusers/${details._id}`, payload,{
+    axoisInstance.put(`http://localhost:9000/users/allusers/${details._id}`, payload,{
       headers: {
         "content-type": "application/json",
       }
@@ -98,7 +97,7 @@ function Userdata() {
       _id
     );
     if (confirm) {
-      axios.delete(`http://localhost:9000/users/allusers/${_id}`)
+      axoisInstance.delete(`http://localhost:9000/users/allusers/${_id}`)
       .then((resp) => getUsers());
     }
   };
