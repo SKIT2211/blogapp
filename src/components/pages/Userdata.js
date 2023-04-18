@@ -59,7 +59,7 @@ function Userdata() {
   const getUsers = () => {
     axoisInstance.get("http://localhost:9000/users/allusers", {
       headers:{
-        Authorization: "Bearer " + accessToken
+        "Authorization": "Bearer " + accessToken
       }
     })
     .then((response) => {
@@ -83,6 +83,8 @@ function Userdata() {
     axoisInstance.put(`http://localhost:9000/users/allusers/${details._id}`, payload,{
       headers: {
         "content-type": "application/json",
+        "Authorization": "Bearer " + accessToken
+
       }
     })
       .then((res) => {
@@ -97,7 +99,11 @@ function Userdata() {
       _id
     );
     if (confirm) {
-      axoisInstance.delete(`http://localhost:9000/users/allusers/${_id}`)
+      axoisInstance.delete(`http://localhost:9000/users/allusers/${_id}`,{
+        headers: {
+          "Authorization": "Bearer " + accessToken
+        }
+      })
       .then((resp) => getUsers());
     }
   };

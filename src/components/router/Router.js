@@ -11,6 +11,8 @@ import Myblogs from '../Myblogs';
 import Userdata from '../pages/Userdata';
 import Protected from '../Protected';
 import ProtectedBlog from '../ProtectedBlog';
+import ResetPassword from '../pages/ResetPassword';
+import ForgotPassword from '../pages/ForgotPassword';
 
 function Router() {
   return (
@@ -32,6 +34,8 @@ function Router() {
           <Route path='/Userdetails' element={<Protected><Userdata /></Protected>} />
           <Route path='/login' element={ <Login />} />
           <Route path='/signup' element={<Signup />} />
+          <Route path='/resetpassword' element={<ResetPassword />} />
+          <Route path='/forgotpassword' element={<ForgotPassword />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -36,7 +36,7 @@ function Login() {
         });
         
         if(AxiosError?.response?.status === 404){
-            // console.log("as",AxiosError?.name);
+            console.log("as",AxiosError?.name);
             toast(AxiosError?.message)
             setIsSubmit(false)
         }else{
@@ -130,6 +130,10 @@ function Login() {
                                             <div>
                                                 Don't have an account yet?
                                                 <Link to='/signup'> Sign Up</Link>
+                                            </div>
+                                            <div>
+                                                Forgot Password .?
+                                                <Link to='/resetpassword'> Click Here.!</Link>
                                             </div>
 
                                         </form>
