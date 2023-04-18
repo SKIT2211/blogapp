@@ -31,8 +31,8 @@ const ResetPassword = () => {
         console.log("res",res);
         const data = await res
 
-        if(data?.status == 201 ){
-            setValues({...values,[e.target.name]:""})
+        if(data?.status === 201 ){
+            setValues({ [e.target.name]:""})
             setMsg(true)
         }else{
             toast.error("Invalid user.")

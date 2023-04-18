@@ -13,6 +13,7 @@ import Protected from '../Protected';
 import ProtectedBlog from '../ProtectedBlog';
 import ResetPassword from '../pages/ResetPassword';
 import ForgotPassword from '../pages/ForgotPassword';
+import PageNotFound from '../pages/PageNotFound';
 
 function Router() {
   return (
@@ -35,7 +36,9 @@ function Router() {
           <Route path='/login' element={ <Login />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/resetpassword' element={<ResetPassword />} />
-          <Route path='/forgotpassword' element={<ForgotPassword />} />
+          <Route path='/forgotpassword/:id/:token' element={<ForgotPassword />} />
+          <Route path='*' element={<PageNotFound />} />
+
         </Routes>
       </BrowserRouter>
     </>

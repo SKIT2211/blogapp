@@ -1,8 +1,68 @@
-import React from 'react'
+import axios from "axios";
+import React, {useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router";
+import { toast } from "react-toastify";
 import styled from "styled-components";
 
-
 const ForgotPassword = () => {
+  const params = useParams();
+  const navigate = useNavigate()
+
+  const [password, setPassword] = useState("");
+  const [msg, setMsg] = useState("");
+
+
+  const userValid = async () => {
+    const res = await axios.get(
+      `http://localhost:9000/users/forgotpassword/${params.id}/${params.token}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    );
+
+    const data = await res
+
+    if(data.status === 201){
+      toast.success("user valid")
+    }else{
+      navigate('*')
+    }
+  };
+
+  const setval = (e)=>{
+    setPassword(e.target.value)
+  }
+
+  const sendPassword = async(e) =>{
+    e.preventDefault()
+
+    const res = await axios.post(
+      `http://localhost:9000/users/${params.id}/${params.token}`, password,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    );
+
+    const data = await res
+    
+    if(data.status === 201){
+      setPassword("")
+      setMsg(true)
+    }else{
+      toast.error("token expired..")
+    }
+    
+  }
+  useEffect(()=>{
+    userValid()
+  },[])
+
   return (
     <Wrapper>
       <section className="background-radial-gradient overflow-hidden">
@@ -16,22 +76,41 @@ const ForgotPassword = () => {
             </div> */}
 
             <div className="col-lg-6 mb-5 mb-lg-0 position-relative">
-              <div id="radius-shape-1" className="position-absolute rounded-circle shadow-5-strong"></div>
-              <div id="radius-shape-2" className="position-absolute shadow-5-strong"></div>
+              <div
+                id="radius-shape-1"
+                className="position-absolute rounded-circle shadow-5-strong"
+              ></div>
+              <div
+                id="radius-shape-2"
+                className="position-absolute shadow-5-strong"
+              ></div>
 
               <div className="card bg-glass">
                 <div className="card-body px-4 py-5 px-md-5">
                   <form>
-                    {/* {msg ? <div className="alert alert-success" role="alert">password reset link send Successfully.!!</div> : ""} */}
+                    {msg ? <div className="alert alert-success" role="alert">password Reset Successfully.!!</div> : ""}
                     <div className="form-outline mb-4">
-                      <label className="form-label" htmlFor="form3Example3">Reset Password</label>
-                      <input type="text" placeholder="Email ID" id="form3Example3" className="form-control" name='email' value={values.email} onChange={handleChange} />
+                      <label className="form-label" htmlFor="form3Example3">
+                        Reset Password
+                      </label>
+                      <input
+                        type="password"
+                        placeholder="Enter New Password"
+                        id="form3Example3"
+                        className="form-control"
+                        name="password"
+                        value={password}
+                        onChange={setval}
+                      />
                     </div>
 
-                    <button type="submit" className="btn btn-primary btn-block mb-4 justify-content-center" onClick={sendLink}>
+                    <button
+                      type="submit"
+                      className="btn btn-primary btn-block mb-4 justify-content-center"
+                      onClick={sendPassword}
+                    >
                       Submit
                     </button>
-
                   </form>
                 </div>
               </div>
@@ -40,49 +119,52 @@ const ForgotPassword = () => {
         </div>
       </section>
     </Wrapper>
-  )
-}
-
+  );
+};
 
 const Wrapper = styled.section`
-    .background-radial-gradient {
-      background-color: hsl(218, 41%, 15%);
-      background-image: radial-gradient(650px circle at 0% 0%,
-          hsl(218, 41%, 35%) 15%,
-          hsl(218, 41%, 30%) 35%,
-          hsl(218, 41%, 20%) 75%,
-          hsl(218, 41%, 19%) 80%,
-          transparent 100%),
-        radial-gradient(1250px circle at 100% 100%,
-          hsl(218, 41%, 45%) 15%,
-          hsl(218, 41%, 30%) 35%,
-          hsl(218, 41%, 20%) 75%,
-          hsl(218, 41%, 19%) 80%,
-          transparent 100%);
-    }
+  .background-radial-gradient {
+    background-color: hsl(218, 41%, 15%);
+    background-image: radial-gradient(
+        650px circle at 0% 0%,
+        hsl(218, 41%, 35%) 15%,
+        hsl(218, 41%, 30%) 35%,
+        hsl(218, 41%, 20%) 75%,
+        hsl(218, 41%, 19%) 80%,
+        transparent 100%
+      ),
+      radial-gradient(
+        1250px circle at 100% 100%,
+        hsl(218, 41%, 45%) 15%,
+        hsl(218, 41%, 30%) 35%,
+        hsl(218, 41%, 20%) 75%,
+        hsl(218, 41%, 19%) 80%,
+        transparent 100%
+      );
+  }
 
-    #radius-shape-1 {
-      height: 220px;
-      width: 220px;
-      top: -60px;
-      left: -130px;
-      background: radial-gradient(#44006b, #ad1fff);
-      overflow: hidden;
-    }
+  #radius-shape-1 {
+    height: 220px;
+    width: 220px;
+    top: -60px;
+    left: -130px;
+    background: radial-gradient(#44006b, #ad1fff);
+    overflow: hidden;
+  }
 
-    #radius-shape-2 {
-      border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
-      bottom: -60px;
-      right: -110px;
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(#44006b, #ad1fff);
-      overflow: hidden;
-    }
+  #radius-shape-2 {
+    border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
+    bottom: -60px;
+    right: -110px;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(#44006b, #ad1fff);
+    overflow: hidden;
+  }
 
-    .bg-glass {
-      background-color: hsla(0, 0%, 100%, 0.9) !important;
-      backdrop-filter: saturate(200%) blur(25px);
-    }
-  `;
-export default ForgotPassword
+  .bg-glass {
+    background-color: hsla(0, 0%, 100%, 0.9) !important;
+    backdrop-filter: saturate(200%) blur(25px);
+  }
+`;
+export default ForgotPassword;
