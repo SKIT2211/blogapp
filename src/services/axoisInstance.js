@@ -2,13 +2,11 @@ import axios from 'axios'
 
 function getLocalAccessToken() {
     let accessToken = JSON.parse(localStorage.getItem("AccessToken"));
-    // accessToken = accessToken.accesstoken
     return accessToken;
 }
 
 function getLocalRefreshToken() {
     let refreshToken = JSON.parse(localStorage.getItem("RefreshToken"));
-    // refreshToken = refreshToken.refreshtoken
     return refreshToken;
 }
 
@@ -41,7 +39,6 @@ axoisInstance.interceptors.response.use(
         const originalConfig = err.config;
 
         if (err.response) {
-            // Access Token was expired
             if (err.response.status === 419 && !originalConfig._retry) {
                 originalConfig._retry = true;
 

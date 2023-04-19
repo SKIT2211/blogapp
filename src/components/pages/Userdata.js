@@ -4,11 +4,10 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import Button from "@mui/material/Button";
-import axoisInstance from "../services/axoisInstance";
+import axoisInstance from "../../services/axoisInstance";
 
 function Userdata() {
   let accessToken = JSON.parse(localStorage.getItem("AccessToken"));
-  // const accessToken = token?.accesstoken
 
   const [role, setRole] = useState();
   const [details, setDetails] = useState(null);
@@ -22,7 +21,6 @@ function Userdata() {
   };
   const [rowData, setRowData] = useState();
   const columnDefs = [
-    // { headerName: "ID", field: "_id" },
     { headerName: "Name", field: "name" },
     { headerName: "Email", field: "email" },
     { headerName: "Number", field: "number" },
@@ -193,9 +191,7 @@ const Wrapper = styled.section`
       --ag-header-background-color: #44006b;
       --ag-odd-row-background-color: rgb(0, 0, 0, 0.03);
       --ag-header-column-resize-handle-color: #ad1fff;
-
       --ag-font-size: 17px;
-      // --ag-font-family: monospace;
     }
   }
 `;

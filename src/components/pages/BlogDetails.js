@@ -83,25 +83,7 @@ const BlogDetails = () => {
 
 const Wrapper = styled.section`{
   .theme {
-    
     background-color:rgb(35, 25, 65);
-    // background-image: radial-gradient(
-    //     650px circle at 0% 0%,
-    //     hsl(218, 41%, 35%) 15%,
-    //     hsl(218, 41%, 30%) 35%,
-    //     hsl(218, 41%, 20%) 75%,
-    //     hsl(218, 41%, 19%) 80%,
-    //     transparent 100%
-    //   ),
-    //   radial-gradient(
-    //     1250px circle at 100% 100%,
-    //     hsl(218, 41%, 45%) 15%,
-    //     hsl(218, 41%, 30%) 35%,
-    //     hsl(218, 41%, 20%) 75%,
-    //     hsl(218, 41%, 19%) 80%,
-    //     transparent 100%
-    //   );
-  
 }
 }`;
 export default BlogDetails

@@ -1,5 +1,5 @@
-import BlogDetails from '../components/BlogDetails';
-import Login from './pages/Login';
+import BlogDetails from '../pages/BlogDetails';
+import Login from '../pages/Login';
 
 function ProtectedBlog() {
   let user = JSON.parse(localStorage.getItem("Loggedinuser"));

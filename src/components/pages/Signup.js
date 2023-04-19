@@ -122,18 +122,6 @@ function Signup() {
                                         <form onSubmit={handleSubmit}>
 
                                             <div className="row">
-                                                {/* <div className="col-md-6 mb-4">
-                                                    <div className="form-outline">
-                                                        <input type="text" id="form3Example1" className="form-control" />
-                                                        <label className="form-label" htmlFor="form3Example1">First name</label>
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-6 mb-4">
-                                                    <div className="form-outline">
-                                                        <input type="text" id="form3Example2" className="form-control" />
-                                                        <label className="form-label" htmlFor="form3Example2">Last name</label>
-                                                    </div>
-                                                </div> */}
                                                 <div className="col-md-12 mb-4">
                                                     <div className="form-outline">
                                                         <label className="form-label" htmlFor="form3Example1">Name</label>

@@ -46,12 +46,10 @@ function Myblogs() {
 
   const [rowData, setRowData] = useState();
   const columnDefs = [
-    // { headerName: "ID", field: "_id" },
     { headerName: "Title", field: "title", cellRenderer: TitleViewer },
     { headerName: "Description", field: "description" },
     { headerName: "Author", field: "author" },
     { headerName: "Category", field: "category" },
-    // { headerName: "UserId", field: "userId" },
   ];
 
   useEffect(() => {
@@ -93,9 +91,7 @@ const Wrapper = styled.section`
       --ag-header-background-color: #44006b;
       --ag-odd-row-background-color: rgb(0, 0, 0, 0.03);
       --ag-header-column-resize-handle-color: #ad1fff;
-
       --ag-font-size: 17px;
-      // --ag-font-family: monospace;
     }
 
      {

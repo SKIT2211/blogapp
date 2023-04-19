@@ -57,12 +57,10 @@ const ResetPassword = () => {
                             <div className="card bg-glass">
                                 <div className="card-body px-4 py-5 px-md-5">
                                     <form>
-                                        {/* {Object.keys(errors).length === 0 && isSubmit ? (<div className="alert alert-success" role="alert">Successfully login!!</div>) : (<div className="alert alert-info" role="alert">Please enter required details to Sign in !!</div>)} */}
                                         {msg ? <div className="alert alert-success" role="alert">password reset link send Successfully.!!</div> : ""}
                                         <div className="form-outline mb-4">
                                             <label className="form-label" htmlFor="form3Example3">Email address </label>
                                             <input type="text" placeholder="Email ID" id="form3Example3" className="form-control" name='email' value={values.email} onChange={handleChange} />
-                                            {/* <p style={{ color: '#ad1fff' }}>{errors.email}</p> */}
                                         </div>
 
                                         <button type="submit" className="btn btn-primary btn-block mb-4 justify-content-center" onClick={sendLink}>

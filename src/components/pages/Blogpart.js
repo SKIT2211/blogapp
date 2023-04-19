@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
-import BlogDialog from "./BlogDialog";
+import BlogDialog from "../dialog/BlogDialog";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/material";
 import axios from "axios";
@@ -36,12 +36,10 @@ function Blogpart() {
 
   const [rowData, setRowData] = useState();
   const columnDefs = [
-    // { headerName: "ID", field: "_id" },
     { headerName: "Title", field: "title",minWidth:300, cellRenderer: TitleViewer },
     { headerName: "Description", field: "description" ,minWidth:300},
     { headerName: "Author", field: "author",minWidth:40 },
     { headerName: "Category", field: "category",minWidth:40 },
-    // { headerName: "Picture", field: "picture",minWidth:200 },
 
     {
       headerName: "Actions",
@@ -120,12 +118,7 @@ function Blogpart() {
     data.append('userId', formData.userId)
     
     if (formData._id) {
-      axios.put(`http://localhost:9000/blogs/allblogs/${formData._id}`, data
-      // {
-      //   method: "PUT",
-      //   body: ,
-      // }
-      )
+      axios.put(`http://localhost:9000/blogs/allblogs/${formData._id}`, data)
         .then((resp) => resp.json())
         .then((resp) => {
           handleClose();
@@ -199,9 +192,7 @@ const Wrapper = styled.section`
       --ag-header-background-color: #44006b;
       --ag-odd-row-background-color: rgb(0, 0, 0, 0.03);
       --ag-header-column-resize-handle-color: #ad1fff;
-
       --ag-font-size: 17px;
-      // --ag-font-family: monospace;
     }
 
     {
