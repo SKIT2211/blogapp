@@ -36,7 +36,7 @@ function Router() {
           <Route path='/Userdetails' element={<Protected><Userdata /></Protected>} />
           <Route path='/resetpassword' element={<ResetPassword />} />
           <Route path='/forgotpassword/:id/:token' element={<ForgotPassword />} />
-          <Route path='*' element={<PageNotFound />} />
+          <Route path='/*' element={<PageNotFound />} />
 
         </Routes>
       </BrowserRouter>

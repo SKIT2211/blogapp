@@ -14,7 +14,7 @@ const ForgotPassword = () => {
 
   const userValid = async () => {
     const res = await axios.get(
-      `http://localhost:9090/users/forgotpassword/${params.id}/${params.token}`,
+      `http://localhost:9000/users/forgotpassword/${params.id}/${params.token}`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -28,7 +28,7 @@ const ForgotPassword = () => {
     if(data.status === 201){
       toast.success("user valid")
     }else{
-      navigate('*')
+      navigate('/*')
     }
   };
 
@@ -44,8 +44,8 @@ const ForgotPassword = () => {
       {
         headers: {
           "Content-Type": "application/json",
-          Accept: "application/json",
-        }, 
+          "Accept": "application/json"
+        }
       }
     );
 
