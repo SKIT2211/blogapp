@@ -40,7 +40,7 @@ const ForgotPassword = () => {
     e.preventDefault()
 
     const res = await axios.post(
-      `http://localhost:9000/users/${params.id}/${params.token}`, password,
+      `http://localhost:9000/users/${params.id}/${params.token}`, {password: password},
       {
         headers: {
           "Content-Type": "application/json",
