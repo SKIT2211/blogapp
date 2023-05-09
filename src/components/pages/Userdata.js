@@ -5,12 +5,17 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import Button from "@mui/material/Button";
 import axoisInstance from "../../services/axoisInstance";
+import { useSelector, useDispatch } from 'react-redux'
 
 function Userdata() {
   let accessToken = JSON.parse(localStorage.getItem("AccessToken"));
 
+  const dispatch = useDispatch()
+  const { users } = useSelector((state) => state?.users);
+
   const [role, setRole] = useState();
   const [details, setDetails] = useState(null);
+
 
   const defaultColDef = {
     sortable: true,
@@ -51,8 +56,8 @@ function Userdata() {
     },
   ];
   useEffect(() => {
-    getUsers();
-  }, []);
+    dispatch(getUsers());
+  }, [dispatch]);
 
   const getUsers = () => {
     axoisInstance.get("http://localhost:9000/users/allusers", {
