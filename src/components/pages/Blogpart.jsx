@@ -164,7 +164,7 @@ function Blogpart() {
 
           <div
             className="ag-theme-alpine"
-            style={{ width: 1300, height: 500, margin: "0 auto" }}
+            style={{ width: 1300, height: '85vh' , margin: "0 auto" }}
           >
             <AgGridReact
               rowData={rowData}
@@ -187,9 +187,9 @@ const Wrapper = styled.section`
    {
     .ag-theme-alpine {
       --ag-foreground-color: rgb(126, 46, 132);
-      --ag-background-color: rgb(35, 25, 65);
-      --ag-header-foreground-color: rgb(204, 245, 172);
-      --ag-header-background-color: #44006b;
+      --ag-background-color: rgb(200,220 ,250 );
+      --ag-header-foreground-color: rgb(50, 200, 160);
+      --ag-header-background-color: #38006b;
       --ag-odd-row-background-color: rgb(0, 0, 0, 0.03);
       --ag-header-column-resize-handle-color: #ad1fff;
       --ag-font-size: 17px;

@@ -4,18 +4,18 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import Button from "@mui/material/Button";
-import axoisInstance from "../../services/axoisInstance";
 import { useSelector, useDispatch } from 'react-redux'
+import { getUsers } from "../../store/userSlice";
+import { deleteUser, updateRole } from "../../services/UserApi";
+
 
 function Userdata() {
-  let accessToken = JSON.parse(localStorage.getItem("AccessToken"));
 
+  const users = useSelector((state) => state?.users?.users);
   const dispatch = useDispatch()
-  const { users } = useSelector((state) => state?.users);
 
   const [role, setRole] = useState();
   const [details, setDetails] = useState(null);
-
 
   const defaultColDef = {
     sortable: true,
@@ -24,7 +24,7 @@ function Userdata() {
     floatingFilter: true,
     resizable: true,
   };
-  const [rowData, setRowData] = useState();
+
   const columnDefs = [
     { headerName: "Name", field: "name" },
     { headerName: "Email", field: "email" },
@@ -58,18 +58,7 @@ function Userdata() {
   useEffect(() => {
     dispatch(getUsers());
   }, [dispatch]);
-  
-  const getUsers = () => {
-    axoisInstance.get("http://localhost:9000/users/allusers", {
-      headers:{
-        "Authorization": "Bearer " + accessToken
-      }
-    })
-    .then((response) => {
-      setRowData(response.data)
-    });
-      
-  };
+
   const changeRole = (data) => {
     setRole(data?.role);
     setDetails(data);
@@ -77,37 +66,26 @@ function Userdata() {
 
   const roleChangeHandler = () => {
     let payload = {
+      _id: details._id,
       name: details.name,
       email: details.email,
       number: details.number,
       password: details.password,
       role: role,
     };
-    axoisInstance.put(`http://localhost:9000/users/allusers/${details._id}`, payload,{
-      headers: {
-        "content-type": "application/json",
-        "Authorization": "Bearer " + accessToken
 
-      }
-    })
-      .then((res) => {
-        setDetails(null)
-       return getUsers()
-      });
+    updateRole(payload)
+    setDetails(null)
+    dispatch(getUsers())
   };
 
   const handleDelete = (_id) => {
     const confirm = window.confirm(
-      "Are you sure you want to delete this row",
-      _id
+      `Are you sure you want to delete this user,   ${_id}`
     );
     if (confirm) {
-      axoisInstance.delete(`http://localhost:9000/users/allusers/${_id}`,{
-        headers: {
-          "Authorization": "Bearer " + accessToken
-        }
-      })
-      .then((resp) => getUsers());
+      deleteUser(_id)
+      dispatch(getUsers())
     }
   };
   return (
@@ -118,7 +96,7 @@ function Userdata() {
           style={{ width: 1250, height: 500, margin: "0 auto" }}
         >
           <AgGridReact
-            rowData={rowData}
+            rowData={users}
             columnDefs={columnDefs}
             animateRows={true}
             defaultColDef={defaultColDef}

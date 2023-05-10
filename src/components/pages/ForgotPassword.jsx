@@ -3,6 +3,7 @@ import React, {useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import styled from "styled-components";
+import { userValidd } from "../../services/UserApi";
 
 const ForgotPassword = () => {
   const params = useParams();
@@ -13,19 +14,8 @@ const ForgotPassword = () => {
 
 
   const userValid = async () => {
-    const res = await axios.get(
-      `http://localhost:9000/users/forgotpassword/${params.id}/${params.token}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
-
-    const data = await res
-
-    if(data.status === 201){
+     let response = await userValidd(params)
+    if(response.status === 201){
       toast.success("user valid")
     }else{
       navigate('/*')
@@ -38,6 +28,7 @@ const ForgotPassword = () => {
 
   const sendPassword = async(e) =>{
     e.preventDefault()
+    //  let response = await userValidd(params)
 
     const res = await axios.post(
       `http://localhost:9000/users/${params.id}/${params.token}`, {password: password},
