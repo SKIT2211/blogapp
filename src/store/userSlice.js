@@ -15,7 +15,7 @@ export const getUsers = createAsyncThunk("users/getUsers", async () => {
   } catch (error) {
     toast.error(error?.response?.data?.msg);
   }
-});
+}); 
 
 const initialState = {
   users: [],
