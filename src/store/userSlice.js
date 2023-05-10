@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import axoisInstance from "../services/axoisInstance";
  
-
+ 
 export const getUsers = createAsyncThunk("users/getUsers", async () => {
   try {
       const response = await axoisInstance.get(`http://localhost:9000/users/allusers`);
