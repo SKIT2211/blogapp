@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { toast } from 'react-toastify';
 import styled from "styled-components";
-
+import { APIS } from "../../constants/constant";
 
 const ResetPassword = () => {
 
@@ -22,7 +22,7 @@ const ResetPassword = () => {
     const sendLink = async(e) =>{
         e.preventDefault();
 
-        const res = await axios.post("http://localhost:9000/users/sendpasslink", values, {
+        const res = await axios.post(`${APIS.USERS_API}/sendpasslink`, values, {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json"

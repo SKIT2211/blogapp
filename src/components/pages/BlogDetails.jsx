@@ -10,6 +10,8 @@ import Button from "@mui/material/Button";
 import { useNavigate } from 'react-router-dom';
 import { CardMedia } from '@mui/material';
 import axios from 'axios';
+import { APIS } from "../../constants/constant";
+
 
 const BlogDetails = () => {
   const params = useParams()
@@ -25,7 +27,7 @@ const BlogDetails = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`http://localhost:9000/blogs/allblogs/${params?.id}`)
+    axios.get(`${APIS.BLOGS_API}/allblogs/${params?.id}`)
       .then(response => setPost(response.data))
 
   }, [params]);

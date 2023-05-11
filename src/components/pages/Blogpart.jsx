@@ -8,10 +8,18 @@ import BlogDialog from "../dialog/BlogDialog";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/material";
 import axios from "axios";
+import { useSelector, useDispatch } from 'react-redux'
+import { getBlogs } from "../../store/blogSlice";
+import { addBlog, deleteBlog } from "../../services/BlogApi";
+import {REACT_FRONT_BASE_URL} from '../../constants/constant';
+import { APIS } from "../../constants/constant";
 
 function Blogpart() {
   let user = JSON.parse(localStorage.getItem("Loggedinuser"));
   user = user?.data ;
+
+  const blogs = useSelector((state) => state?.blogs?.blogs);
+  const dispatch = useDispatch()
 
   const initialValue = { title: "", description: "", author: "", category: "", picture:"", userId: user?._id};
   const [formData, setFormData] = useState(initialValue);
@@ -27,14 +35,13 @@ function Blogpart() {
   const TitleViewer = (pdata) => {
       return (
         <>
-          <Link to={`http://localhost:3000/blogs/${pdata?.data?._id}`} >
+          <Link to={`${REACT_FRONT_BASE_URL}/blogs/${pdata?.data?._id}`} >
             {pdata.value}
           </Link>
         </>
       )
   };
 
-  const [rowData, setRowData] = useState();
   const columnDefs = [
     { headerName: "Title", field: "title",minWidth:300, cellRenderer: TitleViewer },
     { headerName: "Description", field: "description" ,minWidth:300},
@@ -82,13 +89,9 @@ function Blogpart() {
   };
 
   useEffect(() => {
-    getUsers();
-  }, []);
-  const getUsers = () => {
-    axios.get("http://localhost:9000/blogs/allblogs")
-      .then((response) => setRowData(response.data));
-  };
-
+    dispatch(getBlogs())
+  }, [dispatch]);
+  
   const onChange = (e) => {
     const { value, id} = e.target;
     setFormData({ ...formData, [id]: value });
@@ -99,11 +102,11 @@ function Blogpart() {
     handleClickOpen();
   };
 
-  const handleDelete = (_id) => {
+  const handleDelete = (_id) => {  
     const confirm = window.confirm(`Are you sure you want to delete this blog with id : ${_id}`)
     if (confirm) {
-      axios.delete(`http://localhost:9000/blogs/allblogs/${_id}`)
-        .then((resp) => getUsers());
+      deleteBlog(_id)
+      dispatch(getBlogs())
     }
   };
 
@@ -118,18 +121,16 @@ function Blogpart() {
     data.append('userId', formData.userId)
     
     if (formData._id) {
-      axios.put(`http://localhost:9000/blogs/allblogs/${formData._id}`, data)
+      axios.put(`${APIS.BLOGS_API}/allblogs/${formData._id}`, data)
         .then((resp) => resp.json())
         .then((resp) => {
           handleClose();
-          getUsers();
+          dispatch(getBlogs())
         });
     } else {
-      axios.post("http://localhost:9000/blogs/addblog", data)
-        .then((resp) => {
-          handleClose();
-          getUsers();
-        });
+        addBlog(data)
+        handleClose();
+        dispatch(getBlogs())
     }
   };
 
@@ -167,7 +168,7 @@ function Blogpart() {
             style={{ width: 1300, height: '85vh' , margin: "0 auto" }}
           >
             <AgGridReact
-              rowData={rowData}
+              rowData={blogs}
               columnDefs={columnDefs}
               animateRows={true}
               defaultColDef={defaultColDef}

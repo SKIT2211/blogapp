@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 import { userValidd } from "../../services/UserApi";
+import { APIS } from "../../constants/constant";
 
 const ForgotPassword = () => {
   const params = useParams();
@@ -31,7 +32,7 @@ const ForgotPassword = () => {
     //  let response = await userValidd(params)
 
     const res = await axios.post(
-      `http://localhost:9000/users/${params.id}/${params.token}`, {password: password},
+      `${APIS.USERS_API}/${params.id}/${params.token}`, {password: password},
       {
         headers: {
           "Content-Type": "application/json",

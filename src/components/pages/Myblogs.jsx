@@ -5,14 +5,15 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import axios from "axios";
-
+import {REACT_FRONT_BASE_URL} from '../../constants/constant';
+import { APIS } from "../../constants/constant";
 
 function Myblogs() {
   let user = JSON.parse(localStorage.getItem("Loggedinuser"));
   user = user?.data ;
   const userIdBlogViewer = async (_id) => {
 
-    let result = await axios.get(`http://localhost:9000/blogs/myblogs/${user._id}`)
+    let result = await axios.get(`${APIS.BLOGS_API}/myblogs/${user._id}`)
     let userData = result.data
 
     setRowData(userData)
@@ -22,7 +23,7 @@ function Myblogs() {
     if (user) {
       return (
         <>
-          <Link to={`http://localhost:3000/blogs/${pdata?.data?._id}`} >
+          <Link to={`${REACT_FRONT_BASE_URL}/blogs/${pdata?.data?._id}`} >
             {pdata.value}
           </Link>
         </>

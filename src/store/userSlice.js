@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import axoisInstance from "../services/axoisInstance";
-
+import { APIS } from "../constants/constant";
  
 export const getUsers = createAsyncThunk("users/getUsers", async () => {
   try {
-      const response = await axoisInstance.get(`http://localhost:9000/users/allusers`);
+      const response = await axoisInstance.get(`${APIS.USERS_API}/allusers`);
       const users = await response?.data;
       if (users.length > 0) {
         return users;

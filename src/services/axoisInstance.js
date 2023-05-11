@@ -1,4 +1,6 @@
 import axios from 'axios'
+import { APIS } from "../constants/constant";
+
 
 function getLocalAccessToken() {
     let accessToken = JSON.parse(localStorage.getItem("AccessToken"));
@@ -11,7 +13,7 @@ function getLocalRefreshToken() {
 }
 
 function refreshToken() {
-    return axoisInstance.post("http://localhost:9000/users/refresh", {
+    return axoisInstance.post(`${APIS.USERS_API}/refresh`, {
         refreshToken: getLocalRefreshToken(),
     });
 }
