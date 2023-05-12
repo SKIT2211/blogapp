@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from 'react-router-dom';
-
+import { Link } from "react-router-dom";
 
 function Home() {
   return (
@@ -15,8 +14,9 @@ function Home() {
                 style={{ color: "hsl(218, 81%, 95%)" }}
               >
                 Welcome to the Blog WebApp!! <br />
-                <span  style={{ color: "hsl(218, 81%, 75%)" }}>
-                  For more details refer <Link to="/blogpart">Blogs</Link> section
+                <span style={{ color: "hsl(218, 81%, 75%)" }}>
+                  For more details refer <Link to="/blogpart">Blogs</Link>{" "}
+                  section
                 </span>
               </h1>
               <p

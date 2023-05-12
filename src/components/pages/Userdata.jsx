@@ -4,15 +4,13 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import Button from "@mui/material/Button";
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from "react-redux";
 import { getUsers } from "../../store/userSlice";
 import { deleteUser, updateRole } from "../../services/UserApi";
 
-
 function Userdata() {
-
   const users = useSelector((state) => state?.users?.users);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [role, setRole] = useState();
   const [details, setDetails] = useState(null);
@@ -74,9 +72,9 @@ function Userdata() {
       role: role,
     };
 
-    updateRole(payload)
-    setDetails(null)
-    dispatch(getUsers())
+    updateRole(payload);
+    setDetails(null);
+    dispatch(getUsers());
   };
 
   const handleDelete = (_id) => {
@@ -84,8 +82,8 @@ function Userdata() {
       `Are you sure you want to delete this user,   ${_id}`
     );
     if (confirm) {
-      deleteUser(_id)
-      dispatch(getUsers())
+      deleteUser(_id);
+      dispatch(getUsers());
     }
   };
   return (

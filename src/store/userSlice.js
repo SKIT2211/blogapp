@@ -2,20 +2,20 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import axoisInstance from "../services/axoisInstance";
 import { APIS } from "../constants/constant";
- 
+
 export const getUsers = createAsyncThunk("users/getUsers", async () => {
   try {
-      const response = await axoisInstance.get(`${APIS.USERS_API}/allusers`);
-      const users = await response?.data;
-      if (users.length > 0) {
-        return users;
-      } else {
-        toast.error("No Users Found");
-      }
+    const response = await axoisInstance.get(`${APIS.USERS_API}/allusers`);
+    const users = await response?.data;
+    if (users.length > 0) {
+      return users;
+    } else {
+      toast.error("No Users Found");
+    }
   } catch (error) {
     toast.error(error?.response?.data?.msg);
   }
-}); 
+});
 
 const initialState = {
   users: [],

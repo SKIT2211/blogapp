@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, {useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import styled from "styled-components";
@@ -8,52 +8,51 @@ import { APIS } from "../../constants/constant";
 
 const ForgotPassword = () => {
   const params = useParams();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [password, setPassword] = useState("");
   const [msg, setMsg] = useState("");
 
-
   const userValid = async () => {
-     let response = await userValidd(params)
-    if(response.status === 201){
-      toast.success("user valid")
-    }else{
-      navigate('/*')
+    let response = await userValidd(params);
+    if (response.status === 201) {
+      toast.success("user valid");
+    } else {
+      navigate("/*");
     }
   };
 
-  const setval = (e)=>{
-    setPassword(e.target.value)
-  }
+  const setval = (e) => {
+    setPassword(e.target.value);
+  };
 
-  const sendPassword = async(e) =>{
-    e.preventDefault()
+  const sendPassword = async (e) => {
+    e.preventDefault();
     //  let response = await userValidd(params)
 
     const res = await axios.post(
-      `${APIS.USERS_API}/${params.id}/${params.token}`, {password: password},
+      `${APIS.USERS_API}/${params.id}/${params.token}`,
+      { password: password },
       {
         headers: {
           "Content-Type": "application/json",
-          "Accept": "application/json"
-        }
+          Accept: "application/json",
+        },
       }
     );
 
-    const data = await res
-    
-    if(data.status === 201){
-      setPassword("")
-      setMsg(true)
-    }else{
-      toast.error("token expired..")
+    const data = await res;
+
+    if (data.status === 201) {
+      setPassword("");
+      setMsg(true);
+    } else {
+      toast.error("token expired..");
     }
-    
-  }
-  useEffect(()=>{
-    return () => userValid()
-  },[])
+  };
+  useEffect(() => {
+    return () => userValid();
+  }, []);
 
   return (
     <Wrapper>
@@ -73,7 +72,13 @@ const ForgotPassword = () => {
               <div className="card bg-glass">
                 <div className="card-body px-4 py-5 px-md-5">
                   <form>
-                    {msg ? <div className="alert alert-success" role="alert">password Reset Successfully.!!</div> : ""}
+                    {msg ? (
+                      <div className="alert alert-success" role="alert">
+                        password Reset Successfully.!!
+                      </div>
+                    ) : (
+                      ""
+                    )}
                     <div className="form-outline mb-4">
                       <label className="form-label" htmlFor="form3Example3">
                         Reset Password

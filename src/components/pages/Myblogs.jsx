@@ -5,37 +5,32 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import axios from "axios";
-import {REACT_FRONT_BASE_URL} from '../../constants/constant';
+import { REACT_FRONT_BASE_URL } from "../../constants/constant";
 import { APIS } from "../../constants/constant";
 
 function Myblogs() {
   let user = JSON.parse(localStorage.getItem("Loggedinuser"));
-  user = user?.data ;
+  user = user?.data;
   const userIdBlogViewer = async (_id) => {
+    let result = await axios.get(`${APIS.BLOGS_API}/myblogs/${user._id}`);
+    let userData = result.data;
 
-    let result = await axios.get(`${APIS.BLOGS_API}/myblogs/${user._id}`)
-    let userData = result.data
-
-    setRowData(userData)
+    setRowData(userData);
   };
 
   const TitleViewer = (pdata) => {
     if (user) {
       return (
         <>
-          <Link to={`${REACT_FRONT_BASE_URL}/blogs/${pdata?.data?._id}`} >
+          <Link to={`${REACT_FRONT_BASE_URL}/blogs/${pdata?.data?._id}`}>
             {pdata.value}
           </Link>
         </>
       );
-    }
-    else {
-      return <Link to={`/login`} >
-        {pdata.value}
-      </Link>
+    } else {
+      return <Link to={`/login`}>{pdata.value}</Link>;
     }
   };
-
 
   const defaultColDef = {
     sortable: true,
@@ -55,7 +50,6 @@ function Myblogs() {
 
   useEffect(() => {
     userIdBlogViewer();
-
   }, []);
 
   return (

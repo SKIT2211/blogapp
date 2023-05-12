@@ -13,19 +13,19 @@ function Aboutus() {
                 style={{ color: "hsl(218, 81%, 95%)" }}
               >
                 Thanks for Visiting Blog WebApp <br />
-                <span style={{ color: "hsl(218, 81%, 75%)" }}>
-                  About us
-                </span>
+                <span style={{ color: "hsl(218, 81%, 75%)" }}>About us</span>
               </h1>
               <p
                 className="mb-4 opacity-70"
                 style={{ color: "hsl(218, 81%, 85%)" }}
               >
-                Blogs are a new and intriguing form of communication and personal expression. Researchers are
-                only just beginning to realise the value that these media present as sources of data for research.
-                This paper begins to unveil the untapped potential that the blogosphere provides for research. The
-                paper begins by introducing blogs, explaining their evolution and the important role they play in
-                society.
+                Blogs are a new and intriguing form of communication and
+                personal expression. Researchers are only just beginning to
+                realise the value that these media present as sources of data
+                for research. This paper begins to unveil the untapped potential
+                that the blogosphere provides for research. The paper begins by
+                introducing blogs, explaining their evolution and the important
+                role they play in society.
               </p>
             </div>
 
